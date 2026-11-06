@@ -1,0 +1,345 @@
+/* ==========================================================================
+   Lớp cầu nối thư viện bên ngoài ↔ Design System của dự án
+   --------------------------------------------------------------------------
+   Nạp CUỐI CÙNG trong <head> (sau bootstrap, bootstrap-icons, animate,
+   aos, styles.css, navy.css). Nhờ vậy mọi quy tắc ở đây ghi đè được
+   Bootstrap component, nhưng không bao giờ phá design system gốc.
+   Palette gradient: tinh chỉnh theo quy tắc harmony của Adobe Color
+   trên nền navy #1F509E (analogous #3D7BD9 · complementary #E6A811).
+   ========================================================================== */
+
+/* ==========================================================================
+   1. BOOTSTRAP ICONS (.bi) — đồng bộ kích thước với hệ thống
+   ========================================================================== */
+
+/* Icon trong nút .nut: cùng cỡ chữ, thẳng hàng với nhãn. */
+.nut .bi {
+  font-size: 1em;
+  line-height: 1;
+  vertical-align: -0.125em;
+}
+
+/* Nút nhỏ (nut-nho) giữ icon cân đối. */
+.nut-nho .bi {
+  font-size: 1rem;
+}
+
+/* Icon trong thanh điều hướng: mobile là tab bar (icon trên chữ),
+   ≥768px là sidebar (icon cạnh chữ) — kế thừa layout sẵn có của nav a. */
+nav a .bi {
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.nut-thu-gon-sidebar .bi {
+  font-size: 1.25rem;
+}
+
+/* Icon ô KPI trên trang Tổng quan (.bieu-tuong-tong-quan là ô 2rem). */
+.bieu-tuong-tong-quan .bi {
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   2. GRADIENT ADOBE COLOR — điểm nhấn màu cho các yếu tố nhận diện
+   (Token --gradient-* định nghĩa trong css/styles.css, Settings layer)
+   ========================================================================== */
+
+.logo-mark {
+  background: var(--gradient-chinh, linear-gradient(135deg, #1F509E, #3D7BD9));
+}
+
+/* Ô icon KPI: gradient pastel + chữ màu chính. */
+.bieu-tuong-tong-quan {
+  background: linear-gradient(135deg, var(--mau-chinh-nhat), #dbe7fb);
+  color: var(--mau-chinh);
+}
+
+/* Nút chính nhấc lên khi hover: chuyển sang gradient thương hiệu. */
+.nut:not(.nut-vien):not(.nut-nguy-hiem):not([disabled]):hover {
+  background-image: var(--gradient-chinh, linear-gradient(135deg, #1F509E, #3D7BD9));
+  background-color: var(--mau-chinh);
+}
+
+/* Thẻ KPI quỹ lương: nền navy gradient (đè nền đặc của tong-quan.css). */
+.the-quy-luong {
+  background-image: linear-gradient(135deg, var(--nen-quy-luong, #173b67), #2f5ea8);
+}
+
+/* Item điều hướng đang mở: viền gradient trái thay vì màu phẳng. */
+nav a[aria-current="page"] {
+  background-image: linear-gradient(90deg, rgb(31 80 158 / 10%), transparent 60%);
+}
+
+/* ==========================================================================
+   3. BOOTSTRAP DROPDOWN — menu "Dữ liệu" trên header
+   (giữ class cũ .tuy-chon-du-lieu/.menu-du-lieu để tận dụng token màu)
+   ========================================================================== */
+
+.dropdown-menu.tuy-chon-du-lieu {
+  gap: 0.375rem;
+  min-width: max-content;
+  padding: 0.5rem;
+  border: 1px solid var(--mau-vien);
+  border-radius: var(--bo-goc);
+  background: var(--mau-the);
+  box-shadow: var(--bong-noi);
+}
+
+/* Bootstrap .show mặc định display:block; giữ layout grid như thiết kế cũ. */
+.dropdown-menu.tuy-chon-du-lieu.show {
+  display: grid;
+}
+
+.dropdown-menu.tuy-chon-du-lieu .nut {
+  width: 100%;
+  justify-content: flex-start;
+  border-color: transparent;
+  background-color: transparent;
+  background-image: none;
+  color: var(--chu-1);
+}
+
+.dropdown-menu.tuy-chon-du-lieu .nut:hover,
+.dropdown-menu.tuy-chon-du-lieu .nut:focus-visible {
+  border-color: var(--mau-chinh-nhat);
+  background-color: var(--mau-chinh-nhat);
+  color: var(--mau-chinh);
+}
+
+/* Mũi tên dropdown-toggle của Bootstrap dùng màu chữ hiện tại — ổn. */
+.dropdown-toggle::after {
+  margin-inline-start: 0.5em;
+}
+
+/* ==========================================================================
+   4. BOOTSTRAP TABS — trang Khen thưởng & Kỷ luật
+   ========================================================================== */
+
+.tabs-hrm {
+  gap: var(--cach-2);
+  border-bottom: 2px solid var(--mau-vien);
+}
+
+.tabs-hrm .nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.5rem;
+  margin-bottom: -2px;
+  border: 1px solid transparent;
+  border-radius: var(--bo-goc) var(--bo-goc) 0 0;
+  color: var(--chu-2);
+  font-weight: 600;
+}
+
+.tabs-hrm .nav-link:hover {
+  border-color: var(--mau-chinh-nhat);
+  color: var(--mau-chinh);
+  isolation: isolate;
+}
+
+.tabs-hrm .nav-link.active {
+  border-color: var(--mau-vien) var(--mau-vien) var(--mau-the);
+  background-color: var(--mau-the);
+  color: var(--mau-chinh);
+}
+
+.tab-content .tab-pane {
+  padding-top: var(--cach-3);
+}
+
+/* ==========================================================================
+   5. BOOTSTRAP ACCORDION — mục "Cách tính lương" trên Bảng lương
+   ========================================================================== */
+
+.accordion-hrm {
+  --bs-accordion-border-color: var(--mau-vien);
+  --bs-accordion-border-radius: var(--bo-goc);
+  --bs-accordion-inner-border-radius: calc(var(--bo-goc) - 1px);
+  --bs-accordion-btn-focus-border-color: var(--mau-chinh);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem var(--mau-chinh-nhat);
+  --bs-accordion-active-color: var(--mau-chinh);
+  --bs-accordion-active-bg: var(--mau-chinh-nhat);
+}
+
+.accordion-hrm .accordion-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--chu-1);
+  font-weight: 600;
+}
+
+.accordion-hrm .accordion-button:not(.collapsed) {
+  box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--mau-vien);
+}
+
+.accordion-hrm .accordion-body {
+  color: var(--chu-2);
+  line-height: 1.7;
+}
+
+.accordion-hrm .accordion-body strong {
+  color: var(--chu-1);
+}
+
+/* ==========================================================================
+   6. BOOTSTRAP CAROUSEL — "Hướng dẫn nhanh hệ thống" trên Tổng quan
+   ========================================================================== */
+
+.carousel-hrm {
+  border: 1px solid var(--mau-vien);
+  border-radius: var(--bo-goc);
+  background: var(--mau-nen);
+  overflow: hidden;
+}
+
+.carousel-hrm .carousel-item .slide-huong-dan {
+  display: grid;
+  gap: var(--cach-3);
+  justify-items: center;
+  padding: var(--cach-5) var(--cach-4) var(--cach-6);
+  text-align: center;
+}
+
+.carousel-hrm .slide-huong-dan .bi {
+  display: grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  place-items: center;
+  border-radius: var(--bo-goc-lon);
+  background: var(--gradient-chinh, linear-gradient(135deg, #1F509E, #3D7BD9));
+  color: #fff;
+  font-size: 1.75rem;
+}
+
+.carousel-hrm .slide-huong-dan h3 {
+  margin: 0;
+  font-size: var(--co-to);
+  color: var(--chu-1);
+}
+
+.carousel-hrm .slide-huong-dan p {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--chu-2);
+}
+
+.carousel-hrm .carousel-indicators [data-bs-target] {
+  background-color: var(--mau-chinh);
+  opacity: 0.35;
+}
+
+.carousel-hrm .carousel-indicators .active {
+  opacity: 1;
+}
+
+.carousel-hrm .carousel-control-prev-icon,
+.carousel-hrm .carousel-control-next-icon {
+  border-radius: var(--bo-goc-tron);
+  background-color: rgb(31 80 158 / 85%);
+  background-size: 1.25rem;
+}
+
+/* ==========================================================================
+   7. BOOTSTRAP TOOLTIP — chú thích nút thao tác trong bảng
+   ========================================================================== */
+
+.tooltip {
+  --bs-tooltip-bg: var(--mau-chinh-dam);
+  --bs-tooltip-color: #ffffff;
+  --bs-tooltip-border-radius: var(--bo-goc-nho);
+  --bs-tooltip-font-size: var(--co-nho);
+  --bs-tooltip-opacity: 1;
+}
+
+/* ==========================================================================
+   8. AOS — lớp bảo vệ chống "mất nội dung"
+   ========================================================================== */
+
+/* Nếu AOS JS không tải được (offline/CDN lỗi): data-aos không được kích
+   hoạt, đảm bảo mọi phần tử vẫn hiển thị bình thường. */
+html:not(.aos-init) [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Khi in trang: ép hiện toàn bộ nội dung đã/đ chưa reveal. */
+@media print {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Người dùng bật giảm chuyển động: AOS đã tự tắt ở js/thu-vien.js,
+   lớp này chặn thêm cả phần transition còn sót. */
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   9. DIALOG + ANIMATE.CSS — nhấn mạnh hiệu ứng hộp thoại
+   ========================================================================== */
+
+dialog[open].animate__animated {
+  /* Đảm bảo animation dialog luôn hiển thị trên backdrop. */
+  --animate-duration: 0.35s;
+}
+
+/* Ô input lỗi rung nhẹ (shakeX) — thêm qua JS khi validation thất bại. */
+.bo-rung.animate__animated.animate__shakeX {
+  --animate-duration: 0.5s;
+}
+
+/* ==========================================================================
+   10. CHART.JS — khung chứa biểu đồ thay thế
+   ========================================================================== */
+
+.khung-chart {
+  position: relative;
+  min-height: 240px;
+}
+
+/* Biểu đồ cần cao hơn (line chart quỹ lương). */
+.khung-chart-cao {
+  min-height: 280px;
+}
+
+/* Donut thu về kích thước vừa phải, căn giữa khối card. */
+.khung-chart-donut {
+  max-width: 300px;
+  min-height: 230px;
+  margin-inline: auto;
+}
+
+.khung-chart canvas {
+  max-width: 100%;
+}
+
+/* Thông báo fallback khi Chart.js không tải được. */
+.thong-bao-chart-fallback {
+  padding: var(--cach-3);
+  border: 1px dashed var(--mau-vien);
+  border-radius: var(--bo-goc);
+  color: var(--chu-3);
+  font-size: var(--co-nho);
+  text-align: center;
+}
+
+/* ==========================================================================
+   11. SỬA LỖI TIỀM ẨN — .search-item dùng token không tồn tại
+   (styles.css dùng var(--thoi-gian-nhanh) chưa được định nghĩa)
+   ========================================================================== */
+
+.search-item {
+  transition: background var(--tg-nhanh) var(--duong-cong);
+}

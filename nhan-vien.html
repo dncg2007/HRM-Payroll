@@ -6,58 +6,129 @@
     <title>Nhân viên | HRM &amp; Payroll</title>
     <meta name="description" content="Quản lý, tìm kiếm, lọc và cập nhật hồ sơ nhân viên trong hệ thống HRM &amp; Payroll.">
     <script src="js/theme.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Google Fonts: Be Vietnam Pro — bộ font thương hiệu hỗ trợ tiếng Việt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+    <!-- Thư viện bên ngoài: nạp TRƯỚC design system để CSS dự án thắng cascade -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <!-- Design system của dự án; css/thu-vien.css là lớp cầu nối thư viện -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navy.css">
+    <link rel="stylesheet" href="css/thu-vien.css">
     <script src="js/data.js" defer></script>
     <script src="js/kho-du-lieu.js" defer></script>
     <script src="js/logic.js" defer></script>
-    <script src="js/features.js" defer></script>
+    <script src="js/csv-nhan-vien.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countup.umd.js" defer></script>
+    <script src="js/giao-dien.js" defer></script>
+    <script src="js/thu-vien.js" defer></script>
+    <script src="js/trang/nhan-vien.js" defer></script>
   </head>
-  <body>
+  <body class="giao-dien-navy">
     <a class="skip-link" href="#noi-dung-chinh">Bỏ qua tới nội dung</a>
-    <svg class="icon-sprite" aria-hidden="true" focusable="false">
-      <symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z"/></symbol>
-      <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4ZM8 10a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm8 3c-3.31 0-6 1.79-6 4v3h12v-3c0-2.21-2.69-4-6-4ZM8 13c-2.76 0-5 1.57-5 3.5V20h5v-2c0-1.18.48-2.25 1.28-3.08A6.4 6.4 0 0 0 8 13Z"/></symbol>
-      <symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M3 6a3 3 0 0 1 3-3h12v3H6a1 1 0 0 0 0 2h15v12H6a3 3 0 0 1-3-3V6Zm14 6v3h4v-3h-4Z"/></symbol>
-      <symbol id="icon-building" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M9 7h2m-2 4h2m-2 4h2m-2 4h2m5-8h4a2 2 0 0 1 2 2v6h-6m2-4h2"/></symbol>
-      <symbol id="icon-briefcase" viewBox="0 0 24 24"><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M4 7h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm0 5 8 3 8-3"/></symbol>
-      <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
-      <symbol id="icon-theme" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9 1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9 1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></symbol>
-    </svg>
     <!-- Khối đầu trang: nhận diện hệ thống và thao tác dùng chung. -->
     <header>
       <button class="nut nut-nho nut-vien nut-thu-gon-sidebar" id="nut-thu-gon-sidebar" type="button" aria-label="Thu gọn hoặc mở rộng thanh điều hướng" aria-expanded="true">
-        <svg class="icon" aria-hidden="true"><use href="#icon-menu"></use></svg>
+        <i class="bi bi-list" aria-hidden="true"></i>
         <span class="sr-only">Thu gọn thanh điều hướng</span>
       </button>
-      <!-- Form tìm kiếm dùng chung cho các màn hình; hành vi sẽ bổ sung ở giai đoạn sau. -->
-      <form role="search" action="#" method="get">
+      <form role="search" action="#" method="get" id="global-search-form">
         <label class="sr-only" for="global-search">Tìm kiếm nhanh</label>
-        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
-        <button class="nut nut-nho" type="submit">Tìm</button>
+        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên, phòng ban, chức vụ..." autocomplete="off">
+        <div id="live-search-results" class="search-dropdown-menu" hidden></div>
+        <button class="nut nut-nho" type="submit"><i class="bi bi-search" aria-hidden="true"></i> Tìm</button>
       </form>
-      <!-- Nút dùng theme.js và data-theme để đổi giao diện, script không defer nhằm tránh nháy màu. -->
-      <button class="nut nut-nho" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối">Giao diện tối</button>
+      <div class="cong-cu-tong-quan">
+        <div class="dropdown menu-du-lieu">
+          <button class="nut nut-nho nut-vien dropdown-toggle" id="nut-menu-du-lieu" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dữ liệu</button>
+          <ul class="dropdown-menu tuy-chon-du-lieu dropdown-menu-end" aria-labelledby="nut-menu-du-lieu">
+            <li>
+              <button class="nut nut-nho nut-vien" id="nut-backup-json" type="button"><i class="bi bi-download" aria-hidden="true"></i> Sao lưu JSON</button>
+            </li>
+            <li>
+              <button class="nut nut-nho nut-vien" id="nut-restore-json" type="button"><i class="bi bi-upload" aria-hidden="true"></i> Khôi phục JSON</button>
+            </li>
+          </ul>
+        </div>
+        <input type="file" id="file-restore-json" accept=".json" hidden>
+        <button class="nut nut-nho nut-vien" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối"><i class="bi bi-moon-stars" aria-hidden="true"></i> Giao diện tối</button>
+      </div>
     </header>
 
     <!-- Điều hướng chính: đánh dấu trang hiện tại bằng aria-current. -->
     <nav aria-label="Điều hướng chính">
       <span class="nav-brand"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></span>
       <ul>
-        <li><a href="index.html" title="Tổng quan"><svg class="icon" aria-hidden="true"><use href="#icon-dashboard"></use></svg><span class="nav-text">Tổng quan</span></a></li>
-        <li><a href="nhan-vien.html" aria-current="page" title="Nhân viên"><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg><span class="nav-text">Nhân viên</span></a></li>
-        <li><a href="bang-luong.html" title="Bảng lương"><svg class="icon" aria-hidden="true"><use href="#icon-wallet"></use></svg><span class="nav-text">Bảng lương</span></a></li>
-        <li><a href="phong-ban.html" title="Phòng ban"><svg class="icon" aria-hidden="true"><use href="#icon-building"></use></svg><span class="nav-text">Phòng ban</span></a></li>
-        <li><a href="chuc-vu.html" title="Chức vụ"><svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg><span class="nav-text">Chức vụ</span></a></li>
+        <li>
+          <a href="index.html" title="Tổng quan">
+            <i class="bi bi-speedometer2" aria-hidden="true"></i>
+            <span class="nav-text">Tổng quan</span>
+          </a>
+        </li>
+        <li>
+          <a href="nhan-vien.html" aria-current="page" title="Nhân viên">
+            <i class="bi bi-people" aria-hidden="true"></i>
+            <span class="nav-text">Nhân viên</span>
+          </a>
+        </li>
+        <li>
+          <a href="cham-cong.html" title="Chấm công">
+            <i class="bi bi-calendar-week" aria-hidden="true"></i>
+            <span class="nav-text">Chấm công</span>
+          </a>
+        </li>
+        <li>
+          <a href="nghi-phep.html" title="Nghỉ phép">
+            <i class="bi bi-calendar2-check" aria-hidden="true"></i>
+            <span class="nav-text">Nghỉ phép</span>
+          </a>
+        </li>
+        <li>
+          <a href="bang-luong.html" title="Bảng lương">
+            <i class="bi bi-wallet2" aria-hidden="true"></i>
+            <span class="nav-text">Bảng lương</span>
+          </a>
+        </li>
+        <li>
+          <a href="khen-thuong.html" title="Khen thưởng">
+            <i class="bi bi-award" aria-hidden="true"></i>
+            <span class="nav-text">Khen thưởng</span>
+          </a>
+        </li>
+        <li>
+          <a href="phong-ban.html" title="Phòng ban">
+            <i class="bi bi-building" aria-hidden="true"></i>
+            <span class="nav-text">Phòng ban</span>
+          </a>
+        </li>
+        <li>
+          <a href="chuc-vu.html" title="Chức vụ">
+            <i class="bi bi-briefcase" aria-hidden="true"></i>
+            <span class="nav-text">Chức vụ</span>
+          </a>
+        </li>
       </ul>
     </nav>
 
     <!-- Nội dung chính của trang quản lý nhân viên. -->
     <main id="noi-dung-chinh" class="trang-nhan-vien">
-      <h1 class="tieu-de animate__animated animate__fadeInDown">Quản lý nhân viên</h1>
+      <div class="dau-trang-navy">
+        <div>
+          <p class="nhan-trang-navy">Hồ sơ nhân sự</p>
+          <h1 class="tieu-de">Quản lý nhân viên</h1>
+          <p class="mo-ta-trang-navy">Tra cứu hồ sơ, theo dõi phòng ban và cập nhật hợp đồng.</p>
+        </div>
+        <button class="nut" id="nut-them-nhan-vien" type="button">Thêm nhân viên mới</button>
+      </div>
 
       <!-- ===== Bộ lọc nhân viên: tìm kiếm và lọc danh sách động. ===== -->
-      <section class="khu-cong-cu the" aria-labelledby="employee-search-heading">
+      <section class="khu-cong-cu the" aria-labelledby="employee-search-heading" data-aos="fade-up">
         <h2 id="employee-search-heading">Tìm kiếm và lọc nhân viên</h2>
         <form id="form-loc" action="#employee-list" method="get" aria-label="Bộ lọc nhân viên">
           <!-- Div chỉ gom nhóm label và control cho CSS, không mang ý nghĩa nội dung (Chương 3 §2.14). -->
@@ -76,7 +147,7 @@
             <select id="loc-trang-thai" name="trang-thai">
               <option value="">Tất cả trạng thái</option>
               <option value="DangLam">Đang làm việc</option>
-              <option value="DaNghi">Đã nghỉ việc</option>
+              <option value="DaNghi">Không làm việc</option>
             </select>
           </div>
           <div class="hang-nut-loc">
@@ -86,27 +157,40 @@
           </div>
         </form>
         <!-- ===== Thống kê: tổng hợp số lượng nhân viên theo trạng thái. ===== -->
-        <section class="khu-thong-ke" aria-labelledby="employee-stats-heading">
+        <p id="dong-ket-qua" aria-live="polite">Tìm thấy 0 / 0 nhân viên</p>
+        <section class="khu-thong-ke" aria-labelledby="employee-stats-heading" data-aos="fade-up" data-aos-delay="100">
           <h2 id="employee-stats-heading">Thống kê quân số</h2>
           <dl class="thong-ke">
-            <div><dt>Tổng số</dt><dd id="thong-ke-tong">0</dd></div>
-            <div><dt>Đang làm</dt><dd id="thong-ke-dang-lam">0</dd></div>
-            <div><dt>Đã nghỉ</dt><dd id="thong-ke-da-nghi">0</dd></div>
+            <div>
+              <dt>Tổng số</dt>
+              <dd id="thong-ke-tong">0</dd>
+            </div>
+            <div>
+              <dt>Đang làm</dt>
+              <dd id="thong-ke-dang-lam">0</dd>
+            </div>
+            <div>
+              <dt>Không làm việc</dt>
+              <dd id="thong-ke-da-nghi">0</dd>
+            </div>
           </dl>
         </section>
       </section>
 
       <!-- ===== Danh sách nhân viên: bảng được render từ Data Contract. ===== -->
-      <section class="khu-danh-sach" id="employee-list" aria-labelledby="employee-list-heading">
+      <section class="khu-danh-sach the" id="employee-list" aria-labelledby="employee-list-heading" data-aos="fade-up" data-aos-delay="200">
         <div class="thanh-cong-cu">
           <div>
             <h2 id="employee-list-heading">Danh sách nhân viên</h2>
-            <p id="dong-ket-qua" aria-live="polite">Tìm thấy 0 / 0 nhân viên</p>
           </div>
-          <div>
-            <button class="nut" id="nut-them-nhan-vien" type="button">Thêm nhân viên mới</button>
+          <div class="hang-nut-cong-cu">
+            <input type="file" id="file-nhap-excel" accept=".csv" hidden>
+            <button class="nut nut-vien" id="nut-nhap-excel-nv" type="button">Nhập CSV</button>
+            <button class="nut nut-vien" id="nut-xuat-excel-nv" type="button">Xuất CSV</button>
           </div>
         </div>
+        <p id="ket-qua-nhap-csv" role="status"></p>
+        <ul id="loi-nhap-csv" hidden></ul>
         <div class="bang-cuon">
           <table id="bang-nhan-vien">
             <caption>Danh sách nhân viên từ dữ liệu mẫu</caption>
@@ -126,45 +210,149 @@
             <tbody id="than-bang-nhan-vien"></tbody>
           </table>
         </div>
+        <div id="phan-trang-nhan-vien" class="thanh-phan-trang"></div>
       </section>
     </main>
 
-    <!-- Dialog xem chi tiết hồ sơ nhân viên -->
-    <dialog id="dialog-xem-ho-so" aria-labelledby="tieu-de-dialog-xem-ho-so">
+    <!-- Dialog xem chi tiết hồ sơ nhân viên: thẻ hồ sơ theo nhóm -->
+    <dialog id="dialog-xem-ho-so" class="hop-thoai-lon" aria-labelledby="tieu-de-dialog-xem-ho-so">
       <div class="ho-so-modal-body">
-        <h2 id="tieu-de-dialog-xem-ho-so">Chi tiết hồ sơ nhân viên</h2>
-        <div id="noi-dung-ho-so-modal">
-          <h3 id="ho-so-ho-ten">Chưa chọn nhân viên</h3>
-          <dl>
-            <dt>Mã nhân viên</dt>
-            <dd id="ho-so-ma-nv">—</dd>
-            <dt>Phòng ban</dt>
-            <dd id="ho-so-phong-ban">—</dd>
-            <dt>Chức vụ</dt>
-            <dd id="ho-so-chuc-vu">—</dd>
-            <dt>Giới tính</dt>
-            <dd id="ho-so-gioi-tinh">—</dd>
-            <dt>Ngày sinh</dt>
-            <dd id="ho-so-ngay-sinh">—</dd>
-            <dt>Điện thoại</dt>
-            <dd id="ho-so-dien-thoai">—</dd>
-            <dt>Email</dt>
-            <dd id="ho-so-email">—</dd>
-            <dt>CMND/CCCD</dt>
-            <dd id="ho-so-cmnd">—</dd>
-            <dt>Ngày cấp</dt>
-            <dd id="ho-so-ngay-cap">—</dd>
-            <dt>Nơi cấp</dt>
-            <dd id="ho-so-noi-cap">—</dd>
-            <dt>Quê quán</dt>
-            <dd id="ho-so-que-quan">—</dd>
-            <dt>Mức lương</dt>
-            <dd id="ho-so-muc-luong">—</dd>
-            <dt>Hợp đồng</dt>
-            <dd id="ho-so-hop-dong">—</dd>
-          </dl>
+        <h2 id="tieu-de-dialog-xem-ho-so" class="ho-so-tieu-de">Chi tiết hồ sơ nhân viên</h2>
+
+        <!-- Hero: nhận diện nhanh nhân viên -->
+        <div class="ho-so-hero">
+          <div id="ho-so-avatar-wrapper" class="ho-so-khung-anh">
+            <img id="ho-so-anh" src="assets/images/avatar-placeholder.svg" alt="Ảnh nhân viên" class="ho-so-anh" hidden>
+            <span id="ho-so-avatar-chu" class="avatar-chu ho-so-avatar-chu">?</span>
+          </div>
+          <div class="ho-so-hero-thong-tin">
+            <h3 id="ho-so-ho-ten" class="ho-so-ten">Chưa chọn nhân viên</h3>
+            <p id="ho-so-chuc-vu-phu" class="ho-so-chuc-vu"></p>
+            <div class="ho-so-hero-chip">
+              <span class="ho-so-chip" id="ho-so-ma-nv">—</span>
+              <button class="nut-copy" type="button" data-copy="ho-so-ma-nv" aria-label="Sao chép mã nhân viên" title="Sao chép mã nhân viên"><i class="bi bi-clipboard" aria-hidden="true"></i></button>
+              <span class="ho-so-chip" id="ho-so-tuoi" hidden></span>
+            </div>
+          </div>
+          <span class="nhan" id="ho-so-badge-trang-thai">—</span>
         </div>
+
+        <!-- Các nhóm thông tin -->
+        <div class="ho-so-luoi-khoi">
+          <section class="ho-so-khoi" aria-labelledby="ho-so-nd-ca-nhan">
+            <h3 class="ho-so-khoi-tieu-de" id="ho-so-nd-ca-nhan"><i class="bi bi-person" aria-hidden="true"></i> Thông tin cá nhân</h3>
+            <dl class="ho-so-danh-sach">
+              <div class="ho-so-dong">
+                <dt>Ngày sinh</dt>
+                <dd id="ho-so-ngay-sinh">—</dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Giới tính</dt>
+                <dd id="ho-so-gioi-tinh">—</dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Hôn nhân</dt>
+                <dd id="ho-so-hon-nhan">—</dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Quê quán</dt>
+                <dd id="ho-so-que-quan">—</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="ho-so-khoi" aria-labelledby="ho-so-nd-cong-viec">
+            <h3 class="ho-so-khoi-tieu-de" id="ho-so-nd-cong-viec"><i class="bi bi-briefcase" aria-hidden="true"></i> Công việc</h3>
+            <dl class="ho-so-danh-sach">
+              <div class="ho-so-dong">
+                <dt>Phòng ban</dt>
+                <dd id="ho-so-phong-ban">—</dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Chức vụ</dt>
+                <dd id="ho-so-chuc-vu">—</dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Hợp đồng</dt>
+                <dd id="ho-so-hop-dong">—</dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Mức lương</dt>
+                <dd id="ho-so-muc-luong" class="ho-so-gia-tri-noi">—</dd>
+              </div>
+            </dl>
+            <p class="ho-so-canh-bao-hd" id="ho-so-hop-dong-canh-bao" hidden></p>
+          </section>
+
+          <section class="ho-so-khoi" aria-labelledby="ho-so-nd-lien-he">
+            <h3 class="ho-so-khoi-tieu-de" id="ho-so-nd-lien-he"><i class="bi bi-telephone" aria-hidden="true"></i> Liên hệ</h3>
+            <dl class="ho-so-danh-sach">
+              <div class="ho-so-dong">
+                <dt>Điện thoại</dt>
+                <dd class="ho-so-lien-he-o">
+                  <a id="ho-so-dien-thoai">—</a>
+                  <button class="nut-copy" type="button" data-copy="ho-so-dien-thoai" aria-label="Sao chép số điện thoại" title="Sao chép số điện thoại"><i class="bi bi-clipboard" aria-hidden="true"></i></button>
+                </dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Email</dt>
+                <dd class="ho-so-lien-he-o">
+                  <a id="ho-so-email">—</a>
+                  <button class="nut-copy" type="button" data-copy="ho-so-email" aria-label="Sao chép email" title="Sao chép email"><i class="bi bi-clipboard" aria-hidden="true"></i></button>
+                </dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Địa chỉ</dt>
+                <dd id="ho-so-dia-chi">—</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="ho-so-khoi" aria-labelledby="ho-so-nd-giay-to">
+            <h3 class="ho-so-khoi-tieu-de" id="ho-so-nd-giay-to"><i class="bi bi-shield-check" aria-hidden="true"></i> Giấy tờ &amp; sức khỏe</h3>
+            <dl class="ho-so-danh-sach">
+              <div class="ho-so-dong">
+                <dt>CMND/CCCD</dt>
+                <dd class="ho-so-lien-he-o">
+                  <span id="ho-so-cmnd">—</span>
+                  <button class="nut-copy" type="button" data-copy="ho-so-cmnd" aria-label="Sao chép số CMND/CCCD" title="Sao chép số CMND/CCCD"><i class="bi bi-clipboard" aria-hidden="true"></i></button>
+                </dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Ngày cấp</dt>
+                <dd id="ho-so-ngay-cap">—</dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Nơi cấp</dt>
+                <dd id="ho-so-noi-cap">—</dd>
+              </div>
+              <div class="ho-so-dong">
+                <dt>Sức khỏe</dt>
+                <dd id="ho-so-suc-khoe">—</dd>
+              </div>
+            </dl>
+          </section>
+        </div>
+
+        <!-- Dải thông tin trình độ & hoàn cảnh -->
+        <div class="ho-so-chan">
+          <div class="ho-so-dong">
+            <dt>Trình độ</dt>
+            <dd id="ho-so-bang-cap">—</dd>
+          </div>
+          <div class="ho-so-dong">
+            <dt>Chuyên ngành</dt>
+            <dd id="ho-so-chuyen-nganh">—</dd>
+          </div>
+          <div class="ho-so-dong">
+            <dt>Người phụ thuộc</dt>
+            <dd id="ho-so-hoan-canh">—</dd>
+          </div>
+        </div>
+
         <div class="dialog-actions">
+          <button class="nut" id="nut-sua-ho-so" type="button"><i class="bi bi-pencil-square" aria-hidden="true"></i> Sửa hồ sơ</button>
+          <button class="nut nut-vien" id="nut-in-ho-so" type="button"><i class="bi bi-printer" aria-hidden="true"></i> In hồ sơ</button>
           <button class="nut nut-vien" id="nut-dong-xem-ho-so" type="button">Đóng</button>
         </div>
       </div>
@@ -176,13 +364,16 @@
         <h2 id="employee-form-heading">Thêm nhân viên mới</h2>
         <form action="#employee-list" method="post" novalidate>
           <fieldset>
-            <legend>Thông tin định danh</legend>
+            <legend>1. Thông tin định danh &amp; Cá nhân</legend>
             <label for="employee-id">Mã nhân viên</label>
             <input id="employee-id" name="employee-id" type="text" readonly aria-describedby="loi-ma-nv">
             <small class="thong-bao-loi" id="loi-ma-nv" aria-live="polite"></small>
             <label for="full-name">Họ và tên</label>
             <input id="full-name" name="HoTen" type="text" autocomplete="name" aria-describedby="loi-ho-ten" required>
             <small class="thong-bao-loi" id="loi-ho-ten" role="alert" aria-live="polite"></small>
+            <label for="avatar-file">Ảnh đại diện (Tùy chọn tải ảnh)</label>
+            <input id="avatar-file" name="HinhAnh" type="file" accept="image/*" aria-describedby="preview-avatar-them">
+            <div id="preview-avatar-them" class="avatar-preview"></div>
             <label for="birth-date">Ngày sinh</label>
             <input id="birth-date" name="NgaySinh" type="date" autocomplete="bday" aria-describedby="loi-ngay-sinh" required>
             <small class="thong-bao-loi" id="loi-ngay-sinh" role="alert" aria-live="polite"></small>
@@ -191,10 +382,17 @@
             <label><input id="gender-female" name="GioiTinh" type="radio" value="Nữ"> Nữ</label>
             <label><input id="gender-other" name="GioiTinh" type="radio" value="Khác"> Khác</label>
             <small class="thong-bao-loi" id="loi-gioi-tinh" role="alert" aria-live="polite"></small>
+            <label for="marital-status">Tình trạng hôn nhân</label>
+            <select id="marital-status" name="HonNhan">
+              <option value="Độc thân">Độc thân</option>
+              <option value="Đã kết hôn">Đã kết hôn</option>
+              <option value="Ly hôn">Ly hôn</option>
+              <option value="Góa">Góa</option>
+            </select>
           </fieldset>
 
           <fieldset>
-            <legend>Thông tin liên hệ</legend>
+            <legend>2. Giấy tờ &amp; Địa chỉ liên hệ</legend>
             <label for="cmnd">CMND/CCCD</label>
             <input id="cmnd" name="CMND" type="text" inputmode="numeric" pattern="^\d{9}(\d{3})?$" autocomplete="off" required aria-describedby="loi-cmnd">
             <small class="thong-bao-loi" id="loi-cmnd" role="alert" aria-live="polite"></small>
@@ -204,9 +402,11 @@
             <label for="issue-place">Nơi cấp</label>
             <input id="issue-place" name="NoiCap" type="text" required aria-describedby="loi-noi-cap">
             <small class="thong-bao-loi" id="loi-noi-cap" role="alert" aria-live="polite"></small>
-            <label for="hometown">Quê quán</label>
+            <label for="hometown">Quê quán (Nguyên quán)</label>
             <input id="hometown" name="QueQuan" type="text" required aria-describedby="loi-que-quan">
             <small class="thong-bao-loi" id="loi-que-quan" role="alert" aria-live="polite"></small>
+            <label for="current-address">Địa chỉ thường trú / Nơi ở hiện nay</label>
+            <input id="current-address" name="DiaChi" type="text" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/TP" required>
             <label for="email">Email</label>
             <input id="email" name="Email" type="email" autocomplete="email">
             <label for="phone">Số điện thoại</label>
@@ -215,7 +415,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>Thông tin công việc</legend>
+            <legend>3. Công việc &amp; Hợp đồng lao động</legend>
             <label for="employee-department">Phòng ban</label>
             <select id="employee-department" name="MaPB" required aria-describedby="loi-phong-ban">
               <option value="">Chọn phòng ban</option>
@@ -224,6 +424,56 @@
             <label for="position">Chức vụ</label>
             <input id="position" name="ChucVu" type="text" required aria-describedby="loi-chuc-vu">
             <small class="thong-bao-loi" id="loi-chuc-vu" role="alert" aria-live="polite"></small>
+            <label for="contract-type">Loại hợp đồng lao động</label>
+            <select id="contract-type" name="LoaiHD">
+              <option value="ThucTap">Hợp đồng thực tập (6 tháng - 70% lương)</option>
+              <option value="ChinhThuc">Hợp đồng chính thức (100% lương)</option>
+              <option value="KhongXacDinhThoiHan">Hợp đồng không xác định thời hạn</option>
+              <option value="XacDinhThoiHan">Hợp đồng xác định thời hạn (1 - 3 năm)</option>
+              <option value="ThuViec">Hợp đồng thử việc</option>
+              <option value="ThoiVu">Hợp đồng thời vụ / khoán việc</option>
+            </select>
+            <div class="luoi-form-hai-cot">
+              <div>
+                <label for="contract-start">Ngày bắt đầu hợp đồng</label>
+                <input id="contract-start" name="TuNgayHD" type="date" value="2026-10-30" aria-describedby="loi-contract-start" required>
+                <p class="thong-bao-loi" id="loi-contract-start"></p>
+              </div>
+              <div>
+                <label for="contract-end">Ngày hết hạn hợp đồng</label>
+                <input id="contract-end" name="DenNgayHD" type="date" aria-describedby="loi-contract-end">
+                <p class="thong-bao-loi" id="loi-contract-end"></p>
+              </div>
+            </div>
+            <label for="proposed-salary">Mức lương thỏa thuận / Đề xuất (VNĐ)</label>
+            <input id="proposed-salary" name="LuongDeXuat" type="number" min="1000000" max="1000000000" step="500000" value="10000000" placeholder="VD: 10000000" aria-describedby="goi-y-luong-de-xuat-them" required>
+            <small class="chu-3 goi-y-truong" id="goi-y-luong-de-xuat-them">Dùng để tính lương khi chưa có mức lương có hiệu lực trong kỳ.</small>
+          </fieldset>
+
+          <fieldset>
+            <legend>4. Bằng cấp, Sức khỏe &amp; Hoàn cảnh gia đình</legend>
+            <label for="education-level">Trình độ học vấn cao nhất</label>
+            <select id="education-level" name="BangCap">
+              <option value="Đại học">Đại học</option>
+              <option value="Thạc sĩ">Thạc sĩ</option>
+              <option value="Tiến sĩ">Tiến sĩ</option>
+              <option value="Cao đẳng">Cao đẳng</option>
+              <option value="Trung cấp">Trung cấp</option>
+              <option value="Phổ thông">Phổ thông</option>
+            </select>
+            <label for="major">Chuyên ngành đào tạo</label>
+            <input id="major" name="ChuyenNganh" type="text" placeholder="VD: Công nghệ thông tin, Quản trị nhân lực, Kế toán...">
+            <label for="health-status">Tình trạng sức khỏe</label>
+            <select id="health-status" name="SucKhoe">
+              <option value="Loại I (Rất tốt)">Loại I (Rất tốt)</option>
+              <option value="Loại II (Tốt)">Loại II (Tốt)</option>
+              <option value="Loại III (Trung bình)">Loại III (Trung bình)</option>
+              <option value="Loại IV">Loại IV</option>
+            </select>
+            <label for="dependents-count">Số người phụ thuộc (Giảm trừ gia cảnh)</label>
+            <input id="dependents-count" name="NguoiPhuThuoc" type="number" min="0" max="20" value="0">
+            <label for="family-circumstance">Hoàn cảnh gia đình / Ghi chú đặc biệt</label>
+            <input id="family-circumstance" name="HoanCanh" type="text" placeholder="VD: Bình thường, Con nhỏ dưới 36 tháng, Gia đình chính sách...">
           </fieldset>
 
           <p id="thong-bao-form" aria-live="polite"></p>
@@ -237,61 +487,109 @@
     </dialog>
 
     <!-- Dialog sửa hồ sơ nhân viên -->
-    <dialog id="dialog-sua-nhan-vien" aria-labelledby="tieu-de-dialog-sua">
+    <dialog id="dialog-sua-nhan-vien" class="hop-thoai-lon" aria-labelledby="tieu-de-dialog-sua">
       <form id="form-sua-nhan-vien" method="dialog">
         <h2 id="tieu-de-dialog-sua">Sửa hồ sơ nhân viên</h2>
-        <div>
+        <fieldset>
+          <legend>1. Thông tin định danh &amp; Cá nhân</legend>
           <label for="edit-employee-id">Mã nhân viên</label>
           <input id="edit-employee-id" name="MaNV" type="text" readonly>
-        </div>
-        <div>
           <label for="edit-full-name">Họ và tên</label>
           <input id="edit-full-name" name="HoTen" type="text" required>
-        </div>
-        <div>
+          <label for="edit-avatar-file">Ảnh đại diện mới</label>
+          <input id="edit-avatar-file" name="HinhAnh" type="file" accept="image/*">
+          <div id="preview-avatar-sua" class="avatar-preview"></div>
           <label for="edit-birth-date">Ngày sinh</label>
           <input id="edit-birth-date" name="NgaySinh" type="date" required>
-        </div>
-        <div>
           <label for="edit-gender">Giới tính</label>
           <select id="edit-gender" name="GioiTinh" required>
             <option value="Nam">Nam</option>
             <option value="Nữ">Nữ</option>
             <option value="Khác">Khác</option>
           </select>
-        </div>
-        <div>
+          <label for="edit-marital-status">Tình trạng hôn nhân</label>
+          <select id="edit-marital-status" name="HonNhan">
+            <option value="Độc thân">Độc thân</option>
+            <option value="Đã kết hôn">Đã kết hôn</option>
+            <option value="Ly hôn">Ly hôn</option>
+            <option value="Góa">Góa</option>
+          </select>
+        </fieldset>
+
+        <fieldset>
+          <legend>2. Giấy tờ &amp; Địa chỉ liên hệ</legend>
           <label for="edit-cmnd">CMND/CCCD</label>
           <input id="edit-cmnd" name="CMND" type="text" required>
-        </div>
-        <div>
           <label for="edit-issue-date">Ngày cấp</label>
           <input id="edit-issue-date" name="NgayCap" type="date" required>
-        </div>
-        <div>
           <label for="edit-issue-place">Nơi cấp</label>
           <input id="edit-issue-place" name="NoiCap" type="text" required>
-        </div>
-        <div>
-          <label for="edit-hometown">Quê quán</label>
+          <label for="edit-hometown">Quê quán (Nguyên quán)</label>
           <input id="edit-hometown" name="QueQuan" type="text" required>
-        </div>
-        <div>
+          <label for="edit-address">Địa chỉ thường trú / Nơi ở hiện nay</label>
+          <input id="edit-address" name="DiaChi" type="text" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/TP">
           <label for="edit-phone">Số điện thoại</label>
           <input id="edit-phone" name="DienThoai" type="tel" required>
-        </div>
-        <div>
           <label for="edit-email">Email</label>
           <input id="edit-email" name="Email" type="email">
-        </div>
-        <div>
+        </fieldset>
+
+        <fieldset>
+          <legend>3. Công việc &amp; Hợp đồng lao động</legend>
           <label for="edit-department">Phòng ban</label>
           <select id="edit-department" name="MaPB" required></select>
-        </div>
-        <div>
           <label for="edit-position">Chức vụ</label>
           <input id="edit-position" name="ChucVu" type="text" required>
-        </div>
+          <label for="edit-contract-type">Loại hợp đồng lao động</label>
+          <select id="edit-contract-type" name="LoaiHD">
+            <option value="ThucTap">Hợp đồng thực tập (6 tháng - 70% lương)</option>
+            <option value="ChinhThuc">Hợp đồng chính thức (100% lương)</option>
+            <option value="KhongXacDinhThoiHan">Hợp đồng không xác định thời hạn</option>
+            <option value="XacDinhThoiHan">Hợp đồng xác định thời hạn (1 - 3 năm)</option>
+            <option value="ThuViec">Hợp đồng thử việc</option>
+            <option value="ThoiVu">Hợp đồng thời vụ / khoán việc</option>
+          </select>
+          <div class="luoi-form-hai-cot">
+            <div>
+              <label for="edit-contract-start">Ngày bắt đầu hợp đồng</label>
+              <input id="edit-contract-start" name="TuNgayHD" type="date">
+            </div>
+            <div>
+              <label for="edit-contract-end">Ngày hết hạn hợp đồng</label>
+              <input id="edit-contract-end" name="DenNgayHD" type="date">
+            </div>
+          </div>
+          <label for="edit-proposed-salary">Mức lương thỏa thuận / Đề xuất (VNĐ)</label>
+          <input id="edit-proposed-salary" name="LuongDeXuat" type="number" min="1000000" max="1000000000" step="500000" placeholder="VD: 10000000" aria-describedby="goi-y-luong-de-xuat-sua">
+          <small class="chu-3 goi-y-truong" id="goi-y-luong-de-xuat-sua">Dùng để tính lương khi chưa có mức lương có hiệu lực trong kỳ.</small>
+        </fieldset>
+
+        <fieldset>
+          <legend>4. Bằng cấp, Sức khỏe &amp; Hoàn cảnh gia đình</legend>
+          <label for="edit-education-level">Trình độ học vấn cao nhất</label>
+          <select id="edit-education-level" name="BangCap">
+            <option value="Đại học">Đại học</option>
+            <option value="Thạc sĩ">Thạc sĩ</option>
+            <option value="Tiến sĩ">Tiến sĩ</option>
+            <option value="Cao đẳng">Cao đẳng</option>
+            <option value="Trung cấp">Trung cấp</option>
+            <option value="Phổ thông">Phổ thông</option>
+          </select>
+          <label for="edit-major">Chuyên ngành đào tạo</label>
+          <input id="edit-major" name="ChuyenNganh" type="text" placeholder="VD: Công nghệ thông tin, Quản trị nhân lực, Kế toán...">
+          <label for="edit-health-status">Tình trạng sức khỏe</label>
+          <select id="edit-health-status" name="SucKhoe">
+            <option value="Loại I (Rất tốt)">Loại I (Rất tốt)</option>
+            <option value="Loại II (Tốt)">Loại II (Tốt)</option>
+            <option value="Loại III (Trung bình)">Loại III (Trung bình)</option>
+            <option value="Loại IV">Loại IV</option>
+          </select>
+          <label for="edit-dependents-count">Số người phụ thuộc (Giảm trừ gia cảnh)</label>
+          <input id="edit-dependents-count" name="NguoiPhuThuoc" type="number" min="0" max="20" value="0">
+          <label for="edit-family-circumstance">Hoàn cảnh gia đình / Ghi chú đặc biệt</label>
+          <input id="edit-family-circumstance" name="HoanCanh" type="text" placeholder="VD: Bình thường, Con nhỏ dưới 36 tháng, Gia đình chính sách...">
+        </fieldset>
+
         <p class="thong-bao-loi" id="loi-dialog-sua" aria-live="polite"></p>
         <div class="dialog-actions">
           <button class="nut" id="nut-luu-sua-nv" type="submit">Lưu thay đổi</button>
@@ -301,14 +599,44 @@
     </dialog>
 
     <!-- Dialog xác nhận cho nghỉ việc -->
-    <dialog id="dialog-cho-nghi-viec" aria-labelledby="tieu-de-dialog-nghi">
+    <dialog id="dialog-cho-nghi-viec" class="hop-thoai-lon hop-thoai-vua" aria-labelledby="tieu-de-dialog-nghi">
       <form id="form-cho-nghi-viec" method="dialog">
         <h2 id="tieu-de-dialog-nghi">Xác nhận cho nghỉ việc</h2>
         <p id="mo-ta-cho-nghi-viec">Bạn có chắc chắn muốn cho nhân viên này thôi việc?</p>
+
+        <!-- Khung kiểm tra điều kiện quy định 1 năm 5 tháng -->
+        <div id="khung-kiem-tra-nghi-viec" class="khung-nghi-viec">
+          <h3 class="tieu-de-quy-dinh-nghi">Quy định nghỉ việc của công ty:</h3>
+          <ul class="danh-sach-quy-dinh-nghi">
+            <li>Thực tập: <strong>6 tháng</strong> (hưởng 70% lương chính thức, giảm 30%).</li>
+            <li>Chính thức: sau 6 tháng thực tập (hưởng 100% lương cơ bản theo quy định).</li>
+            <li>Điều kiện nghỉ việc: <strong>sau tối thiểu 1 năm 5 tháng (17 tháng)</strong> làm việc mới được nghỉ việc.</li>
+          </ul>
+          <div id="thong-tin-tham-nien" class="thong-tin-tham-nien">
+            <div class="dong-tham-nien">
+              <span>Ngày bắt đầu làm việc:</span>
+              <strong id="nghi-ngay-bat-dau">—</strong>
+            </div>
+            <div class="dong-tham-nien">
+              <span>Tổng thâm niên tính đến ngày nghỉ:</span>
+              <strong id="nghi-tham-nien">—</strong>
+            </div>
+            <div id="nghi-tinh-trang-dieu-kien" class="tinh-trang-tham-nien">—</div>
+          </div>
+        </div>
+
         <div>
-          <label for="ngay-nghi-viec">Ngày nghỉ việc</label>
+          <label for="ngay-nghi-viec">Ngày kết thúc hợp đồng khi nghỉ việc</label>
           <input id="ngay-nghi-viec" name="ngayNghi" type="date" required>
         </div>
+
+        <div id="vung-ngoai-le-nghi" class="ngoai-le-nghi" hidden>
+          <label class="nhan-ngoai-le-nghi">
+            <input type="checkbox" id="xac-nhan-ngoai-le-nghi" class="o-chon-ngoai-le-nghi">
+            <span><strong>Phê duyệt ngoại lệ đặc biệt:</strong> Ban Giám đốc đồng ý cho nhân viên nghỉ việc trước hạn cam kết tối thiểu 1 năm 5 tháng (17 tháng).</span>
+          </label>
+        </div>
+
         <p class="thong-bao-loi" id="loi-dialog-nghi" aria-live="polite"></p>
         <div class="dialog-actions">
           <button class="nut nut-nguy-hiem" id="nut-xac-nhan-nghi" type="submit">Xác nhận cho nghỉ</button>

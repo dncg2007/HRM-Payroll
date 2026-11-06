@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nghỉ phép | HRM &amp; Payroll</title>
+    <meta name="description" content="Quản lý và phê duyệt đơn xin nghỉ phép của nhân viên, tự động đồng bộ sang bảng chấm công.">
+    <script src="js/theme.js"></script>
+    <!-- Google Fonts: Be Vietnam Pro — bộ font thương hiệu hỗ trợ tiếng Việt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+    <!-- Thư viện bên ngoài: nạp TRƯỚC design system để CSS dự án thắng cascade -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <!-- Design system của dự án; css/thu-vien.css là lớp cầu nối thư viện -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navy.css">
+    <link rel="stylesheet" href="css/thu-vien.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/kho-du-lieu.js" defer></script>
+    <script src="js/logic.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countup.umd.js" defer></script>
+    <script src="js/giao-dien.js" defer></script>
+    <script src="js/thu-vien.js" defer></script>
+    <script src="js/trang/nghi-phep.js" defer></script>
+  </head>
+  <body class="giao-dien-navy">
+    <a class="skip-link" href="#noi-dung-chinh">Bỏ qua tới nội dung</a>
+
+    <header>
+      <button class="nut nut-nho nut-vien nut-thu-gon-sidebar" id="nut-thu-gon-sidebar" type="button" aria-label="Thu gọn hoặc mở rộng thanh điều hướng" aria-expanded="true">
+        <i class="bi bi-list" aria-hidden="true"></i>
+        <span class="sr-only">Thu gọn thanh điều hướng</span>
+      </button>
+      <form role="search" action="#" method="get" id="global-search-form">
+        <label class="sr-only" for="global-search">Tìm kiếm nhanh</label>
+        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên, phòng ban, chức vụ..." autocomplete="off">
+        <div id="live-search-results" class="search-dropdown-menu" hidden></div>
+        <button class="nut nut-nho" type="submit"><i class="bi bi-search" aria-hidden="true"></i> Tìm</button>
+      </form>
+      <div class="cong-cu-tong-quan">
+        <div class="dropdown menu-du-lieu">
+          <button class="nut nut-nho nut-vien dropdown-toggle" id="nut-menu-du-lieu" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dữ liệu</button>
+          <ul class="dropdown-menu tuy-chon-du-lieu dropdown-menu-end" aria-labelledby="nut-menu-du-lieu">
+            <li>
+              <button class="nut nut-nho nut-vien" id="nut-backup-json" type="button"><i class="bi bi-download" aria-hidden="true"></i> Sao lưu JSON</button>
+            </li>
+            <li>
+              <button class="nut nut-nho nut-vien" id="nut-restore-json" type="button"><i class="bi bi-upload" aria-hidden="true"></i> Khôi phục JSON</button>
+            </li>
+          </ul>
+        </div>
+        <input type="file" id="file-restore-json" accept=".json" hidden>
+        <button class="nut nut-nho nut-vien" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối"><i class="bi bi-moon-stars" aria-hidden="true"></i> Giao diện tối</button>
+      </div>
+    </header>
+
+    <nav aria-label="Điều hướng chính">
+      <span class="nav-brand"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></span>
+      <ul>
+        <li>
+          <a href="index.html" title="Tổng quan">
+            <i class="bi bi-speedometer2" aria-hidden="true"></i>
+            <span class="nav-text">Tổng quan</span>
+          </a>
+        </li>
+        <li>
+          <a href="nhan-vien.html" title="Nhân viên">
+            <i class="bi bi-people" aria-hidden="true"></i>
+            <span class="nav-text">Nhân viên</span>
+          </a>
+        </li>
+        <li>
+          <a href="cham-cong.html" title="Chấm công">
+            <i class="bi bi-calendar-week" aria-hidden="true"></i>
+            <span class="nav-text">Chấm công</span>
+          </a>
+        </li>
+        <li>
+          <a href="nghi-phep.html" aria-current="page" title="Nghỉ phép">
+            <i class="bi bi-calendar2-check" aria-hidden="true"></i>
+            <span class="nav-text">Nghỉ phép</span>
+          </a>
+        </li>
+        <li>
+          <a href="bang-luong.html" title="Bảng lương">
+            <i class="bi bi-wallet2" aria-hidden="true"></i>
+            <span class="nav-text">Bảng lương</span>
+          </a>
+        </li>
+        <li>
+          <a href="khen-thuong.html" title="Khen thưởng">
+            <i class="bi bi-award" aria-hidden="true"></i>
+            <span class="nav-text">Khen thưởng</span>
+          </a>
+        </li>
+        <li>
+          <a href="phong-ban.html" title="Phòng ban">
+            <i class="bi bi-building" aria-hidden="true"></i>
+            <span class="nav-text">Phòng ban</span>
+          </a>
+        </li>
+        <li>
+          <a href="chuc-vu.html" title="Chức vụ">
+            <i class="bi bi-briefcase" aria-hidden="true"></i>
+            <span class="nav-text">Chức vụ</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main id="noi-dung-chinh" class="trang-nghi-phep">
+      <div class="dau-trang-navy">
+        <div>
+          <p class="nhan-trang-navy">Thời gian làm việc</p>
+          <h1 class="tieu-de">Nghỉ phép</h1>
+          <p class="mo-ta-trang-navy">Gửi đơn, theo dõi trạng thái và xử lý các đơn chờ duyệt.</p>
+        </div>
+        <button class="nut" id="nut-tao-don-np" type="button">Gửi đơn nghỉ phép mới</button>
+      </div>
+
+      <!-- Thống kê trạng thái đơn -->
+      <section class="the" aria-labelledby="leave-stats-heading" data-aos="fade-up">
+        <h2 id="leave-stats-heading" class="sr-only">Thống kê đơn nghỉ phép</h2>
+        <dl class="thong-ke">
+          <div>
+            <dt>Tổng số đơn</dt>
+            <dd id="thong-ke-np-tong">0</dd>
+          </div>
+          <div>
+            <dt>Chờ duyệt</dt>
+            <dd id="thong-ke-np-cho" class="chu-canh-bao">0</dd>
+          </div>
+          <div>
+            <dt>Đã duyệt</dt>
+            <dd id="thong-ke-np-duyet" class="chu-thanh-cong">0</dd>
+          </div>
+          <div>
+            <dt>Từ chối</dt>
+            <dd id="thong-ke-np-tu-choi" class="chu-loi">0</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- Danh sách đơn & Bộ lọc -->
+      <section class="the" aria-labelledby="leave-list-heading" data-aos="fade-up" data-aos-delay="100">
+        <div class="thanh-cong-cu">
+          <div>
+            <h2 id="leave-list-heading">Danh sách đơn nghỉ phép</h2>
+            <p id="np-dong-ket-qua" aria-live="polite">Hiển thị 0 đơn nghỉ phép</p>
+          </div>
+          <div class="hang-nut-cong-cu">
+            <button class="nut nut-vien" id="nut-xuat-excel-np" type="button">Xuất CSV</button>
+          </div>
+        </div>
+
+        <form id="form-loc-np" class="hang-nut-cong-cu bo-loc-danh-sach">
+          <label class="sr-only" for="loc-np-tu-khoa">Tìm đơn nghỉ phép</label>
+          <input id="loc-np-tu-khoa" type="search" placeholder="Tìm theo tên nhân viên, mã NV hoặc mã đơn...">
+          <label class="sr-only" for="loc-np-trang-thai">Lọc đơn nghỉ theo trạng thái</label>
+          <select id="loc-np-trang-thai">
+            <option value="">Tất cả trạng thái</option>
+            <option value="ChoDuyet">Chờ duyệt</option>
+            <option value="DaDuyet">Đã duyệt</option>
+            <option value="TuChoi">Đã từ chối</option>
+          </select>
+          <label class="sr-only" for="loc-np-loai">Lọc đơn nghỉ theo loại</label>
+          <select id="loc-np-loai">
+            <option value="">Tất cả loại nghỉ</option>
+            <option value="PhepNam">Nghỉ phép năm (hưởng lương)</option>
+            <option value="NghiOm">Nghỉ ốm / Khám bệnh</option>
+            <option value="ViecRieng">Nghỉ việc riêng (không lương)</option>
+          </select>
+        </form>
+
+        <div class="bang-cuon">
+          <table id="bang-nghi-phep">
+            <caption>Danh sách đơn xin nghỉ phép và tiến độ phê duyệt</caption>
+            <thead>
+              <tr>
+                <th scope="col">Mã đơn</th>
+                <th scope="col">Mã NV</th>
+                <th scope="col">Họ và tên</th>
+                <th scope="col">Phòng ban</th>
+                <th scope="col">Loại nghỉ</th>
+                <th scope="col">Thời gian nghỉ</th>
+                <th scope="col">Số ngày</th>
+                <th scope="col">Lý do</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Thao tác duyệt</th>
+              </tr>
+            </thead>
+            <tbody id="than-bang-nghi-phep"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- Dialog gửi đơn nghỉ phép -->
+    <dialog id="dialog-tao-don-np" aria-labelledby="tieu-de-dialog-np">
+      <form id="form-tao-don-np" method="dialog">
+        <h2 id="tieu-de-dialog-np">Gửi đơn xin nghỉ phép</h2>
+        <div>
+          <label for="np-ma-don">Mã đơn</label>
+          <input id="np-ma-don" name="MaDon" type="text" readonly>
+        </div>
+        <div>
+          <label for="np-nhan-vien">Nhân viên làm đơn</label>
+          <select id="np-nhan-vien" name="MaNV" required>
+            <option value="">Chọn nhân viên</option>
+          </select>
+        </div>
+        <div>
+          <label for="np-loai-nghi">Loại nghỉ phép</label>
+          <select id="np-loai-nghi" name="LoaiNghi" required>
+            <option value="PhepNam">Nghỉ phép năm (Hưởng nguyên lương)</option>
+            <option value="NghiOm">Nghỉ ốm đau / Khám bệnh</option>
+            <option value="ViecRieng">Nghỉ việc riêng (Không hưởng lương)</option>
+          </select>
+        </div>
+        <div class="luoi-form-hai-cot">
+          <div>
+            <label for="np-tu-ngay">Từ ngày</label>
+            <input id="np-tu-ngay" name="TuNgay" type="date" required value="2026-10-30">
+          </div>
+          <div>
+            <label for="np-den-ngay">Đến ngày</label>
+            <input id="np-den-ngay" name="DenNgay" type="date" required value="2026-10-30">
+          </div>
+        </div>
+        <div>
+          <p id="np-so-ngay-tinh" class="goi-y-ngay-nghi">Số ngày tính công: 1 ngày (trừ T7, CN)</p>
+        </div>
+        <div>
+          <label for="np-ly-do">Lý do xin nghỉ</label>
+          <textarea id="np-ly-do" name="LyDo" rows="3" required placeholder="Ghi rõ lý do nghỉ phép..."></textarea>
+        </div>
+        <div class="dialog-actions">
+          <button class="nut" id="nut-luu-don-np" type="submit">Gửi đơn phê duyệt</button>
+          <button class="nut nut-vien" id="nut-huy-don-np" type="button">Hủy</button>
+        </div>
+      </form>
+    </dialog>
+
+    <footer>
+      <p>© 2026 HRM &amp; Payroll — Hệ thống Quản lý Nhân sự &amp; Tiền lương.</p>
+      <address>Email hỗ trợ: <a href="mailto:hrm@example.com">hrm@example.com</a></address>
+    </footer>
+  </body>
+</html>
