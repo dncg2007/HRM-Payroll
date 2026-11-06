@@ -310,7 +310,7 @@ function chonGiaoDien(giaTriLuu, uaTuaHeThongToi) {
   return uaTuaHeThongToi === true ? "dark" : "light";
 }
 
-/** Suy ra trạng thái hợp đồng tại ngày tham chiếu theo view SQL, không dùng Date. */
+/** Suy ra trạng thái hợp đồng tại ngày tham chiếu bằng cách so sánh ngày hiệu lực. */
 function suyRaTrangThai(maNV, dsHopDong, ngayThamChieu) {
   if (typeof maNV !== "string" || !Array.isArray(dsHopDong) || !laNgayHopLe(ngayThamChieu)) return "DaNghi";
   const coHopDong = dsHopDong.some((hd) => hd?.MaNV === maNV && !kiemTraKhoangHopDong(hd.TuNgay, hd.DenNgay)

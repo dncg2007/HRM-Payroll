@@ -1,5 +1,9 @@
 # Ghi chú cập nhật
 
+## Dọn mã nguồn website
+
+- Gỡ các script SQL của đề tài khác. Website lưu dữ liệu trên trình duyệt bằng `localStorage`.
+
 ## Sửa bản in hồ sơ nhân viên
 
 - Dành đủ chiều rộng cho cột nội dung và bỏ khung cuộn khi in để hiển thị đầy đủ các nhóm thông tin.
@@ -36,4 +40,4 @@ Các thay đổi dưới đây được đối chiếu với nhánh `main` tại
 
 - Mở rộng kho dữ liệu trình duyệt với sao lưu và khôi phục JSON, kiểm tra dữ liệu nhập và phát hiện bản ghi đã thay đổi ở tab khác.
 - Thay `js/features.js` bằng các tệp xử lý riêng trong `js/trang/` và tiện ích giao diện dùng chung. Cập nhật sơ đồ trang, tài liệu thiết kế và hướng dẫn tích hợp thư viện.
-- Website chạy độc lập ở phía trình duyệt. Các script SQL trong `db/` là phần cơ sở dữ liệu của đề tài.
+- Website chạy độc lập ở phía trình duyệt.

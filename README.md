@@ -37,7 +37,6 @@ Xem [ghi chú cập nhật](CHANGELOG.md) để đối chiếu với bản trư�
 │   ├── thu-vien.js        # Bộ điều phối thư viện (AOS, tooltip, CountUp)
 │   └── trang/            # Mỗi trang HTML tải một tệp xử lý riêng
 ├── assets/images/
-├── db/                     # Script SQL của đề tài
 ├── docs/
 └── prompt_log.md
 ```
@@ -100,13 +99,13 @@ https://dncg2007.github.io/web-qlns-tl/
 | Thực thể | Khóa chính / liên kết | Ghi chú |
 |---|---|---|
 | `PhongBan` | `MaPB`, `MaTruongPhong` | Phòng ban và trưởng phòng |
-| `NhanVien` | `MaNV`, `MaPB` | Mã theo định dạng SQL `NV0001` |
+| `NhanVien` | `MaNV`, `MaPB` | Mã nhân viên, ví dụ `NV0001` |
 | `MucLuong` | `MaMucLuong` | Mức tiền lương |
 | `LuongNhanVien` | `MaLuongNhanVien`, `MaNV`, `MaMucLuong` | `NgayKetThuc = NULL` là dòng hiện hành |
 | `HopDongLaoDong` | `MaHD`, `MaNV` | `LoaiHD` thuộc 1, 2, 3 |
 | `ChamCong` | `MaChamCong`, `MaNV`, `Thang` | Một dòng cho mỗi nhân viên/tháng |
 
-`TrangThai` (`DangLam`/`DaNghi`) là trường mô phỏng dẫn xuất từ view `dbo.v_NhanVien_TrangThai`, không phải cột SQL lưu trực tiếp.
+`TrangThai` (`DangLam`/`DaNghi`) được tính dựa trên thời hạn hợp đồng tại ngày tham chiếu.
 
 ## Giới hạn đã biết
 
@@ -114,8 +113,6 @@ https://dncg2007.github.io/web-qlns-tl/
 - Tệp khôi phục phải có danh sách nhân viên, phòng ban, hợp đồng và chức vụ. Hệ thống kiểm tra kiểu dữ liệu, khoảng ngày và liên kết mã trước khi khôi phục. Nếu dữ liệu đã thay đổi ở tab khác, hệ thống yêu cầu tải lại trước khi lưu.
 - Sao lưu lấy bản đã ghi mới nhất trong trình duyệt. Khi khôi phục thành công, trang tải lại để hiển thị dữ liệu mới.
 - Bảng lương dùng dữ liệu và công thức mô phỏng của đề tài.
-- `MaLuongNhanVien` đang dùng định dạng front-end `L####`, chờ xác nhận triển khai vật lý từ AI Database.
-- Chưa có backend hoặc kết nối SQL Server trong phạm vi front-end.
 
 ## Thành viên nhóm
 
