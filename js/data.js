@@ -1,4 +1,4 @@
-/* Data Contract v1.1: dữ liệu front-end mẫu bám tên cột SQL. */
+/* Data Contract v1.1: dữ liệu mẫu của website. */
 
 const PHONG_BAN = [
   { MaPB: "PB01", TenPB: "Ban Giám đốc", MoTa: "Điều hành chung và định hướng chiến lược.", MaTruongPhong: "NV0001" },
