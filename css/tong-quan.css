@@ -1,0 +1,222 @@
+/* Trang Tổng quan */
+.trang-tong-quan {
+  --nen-quy-luong: #173b67;
+  --chu-quy-luong: #fff;
+  --chu-phu-quy-luong: #d7e6fb;
+}
+
+:root[data-theme="dark"] .trang-tong-quan {
+  --nen-quy-luong: #1c4270;
+}
+
+.ky-luong-tong-quan {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--mau-vien);
+  border-radius: var(--bo-goc);
+  background: var(--mau-the);
+  line-height: 1.35;
+}
+
+.ky-luong-tong-quan div span {
+  display: block;
+  color: var(--chu-3);
+  font-size: 0.75rem;
+}
+
+.ky-luong-tong-quan time {
+  color: var(--chu-1);
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.bieu-tuong-tong-quan {
+  display: grid;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border-radius: 0.5rem;
+  background-color: var(--mau-chinh-nhat);
+  color: var(--mau-chinh);
+}
+
+.trang-tong-quan .khu-kpi {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.trang-tong-quan .khu-kpi .the {
+  gap: 0.35rem;
+}
+
+.dau-kpi {
+  display: flex;
+  min-height: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.dau-kpi h3 {
+  margin: 0;
+  font-size: var(--co-nho);
+}
+
+.trang-tong-quan .so-kpi {
+  color: var(--chu-1);
+  font-size: clamp(1.35rem, 1.05rem + 0.85vw, 2rem);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.trang-tong-quan .the-quy-luong {
+  border-color: var(--nen-quy-luong);
+  background: var(--nen-quy-luong);
+}
+
+.the-quy-luong h3,
+.trang-tong-quan .the-quy-luong .so-kpi {
+  color: var(--chu-quy-luong);
+}
+
+.the-quy-luong .nhan-kpi {
+  color: var(--chu-phu-quy-luong);
+}
+
+.the-quy-luong .bieu-tuong-tong-quan {
+  background: rgb(255 255 255 / 13%);
+  color: var(--chu-quy-luong);
+}
+
+.tong-quan-chinh,
+.tong-quan-chi-tiet {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.trang-tong-quan .the h2 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.25rem);
+  line-height: 1.3;
+}
+
+.dau-khu-tong-quan {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+.so-hop-dong,
+.han-hop-dong {
+  display: inline-block;
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--bo-goc-tron);
+  background: var(--mau-canh-bao-nhat);
+  color: var(--mau-canh-bao);
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.so-hop-dong[data-rong="true"] {
+  background: var(--mau-chinh-nhat);
+  color: var(--mau-chinh);
+}
+
+.trang-tong-quan .ds-hop-dong li {
+  display: block;
+  padding: 0;
+  border: 1px solid var(--mau-vien);
+  border-radius: var(--bo-goc);
+  background: var(--mau-the);
+}
+
+.lien-ket-hop-dong {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem 0.75rem;
+  padding: 0.75rem;
+  border-radius: inherit;
+  text-decoration: none;
+}
+
+.lien-ket-hop-dong:hover {
+  background: var(--mau-nen);
+}
+
+.trang-tong-quan .hop-dong-info strong {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.trang-tong-quan .hop-dong-info time {
+  color: var(--chu-3);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.trang-tong-quan .ds-hop-dong .hop-dong-rong {
+  padding: 0.75rem;
+  color: var(--chu-3);
+}
+
+.trang-tong-quan .bieu-do-cot {
+  margin: 0;
+}
+
+.trang-tong-quan .bieu-do-cot ul {
+  gap: 0.5rem;
+}
+
+.trang-tong-quan .bieu-do-cot li {
+  grid-template-columns: minmax(0, 1.2fr) minmax(1rem, 2fr) 2ch;
+  font-size: var(--co-nho);
+}
+
+.trang-tong-quan .bieu-do-cot li > span:first-child {
+  overflow-wrap: anywhere;
+}
+
+.trang-tong-quan .bieu-do-cot .thanh {
+  height: 0.5rem;
+}
+
+@media (min-width: 440px) {
+  .trang-tong-quan .khu-kpi {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .tong-quan-chinh {
+    grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr);
+    grid-template-areas: "phong-ban canh-bao";
+  }
+
+  .tong-quan-chinh .khu-bieu-do-pb { grid-area: phong-ban; }
+  .tong-quan-chinh .khu-het-han {
+    grid-area: canh-bao;
+    align-self: start;
+  }
+}
+
+@media (min-width: 1120px) {
+  .tong-quan-chi-tiet {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1160px) {
+  .trang-tong-quan .khu-kpi {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

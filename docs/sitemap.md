@@ -11,7 +11,18 @@
   - Form thêm/sửa
   - Hồ sơ nhanh
 - **Bảng lương** | `bang-luong.html`
-  - Chọn tháng
+  - Chọn tháng và phòng ban
   - Bảng chấm công và lương
   - Tổng quỹ
   - Phiếu lương cá nhân
+- **Chấm công** | `cham-cong.html`
+  - Bảng công theo ngày, có thể lưu và xuất CSV
+- **Nghỉ phép** | `nghi-phep.html`
+  - Tạo đơn, duyệt và từ chối
+  - Ghi ngày nghỉ đã duyệt vào bảng công
+- **Khen thưởng & Kỷ luật** | `khen-thuong.html`
+  - Tra cứu quy định, lập quyết định và tổng hợp thưởng phạt
+- **Phòng ban** | `phong-ban.html`
+  - Quản lý danh mục phòng ban và trưởng phòng
+- **Chức vụ** | `chuc-vu.html`
+  - Quản lý danh mục chức vụ và thống kê nhân viên theo chức vụ

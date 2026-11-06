@@ -6,62 +6,131 @@
     <title>Chức vụ | HRM &amp; Payroll</title>
     <meta name="description" content="Quản lý danh mục chức vụ, định biên nhân sự và vị trí công tác trong hệ thống HRM &amp; Payroll.">
     <script src="js/theme.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Google Fonts: Be Vietnam Pro — bộ font thương hiệu hỗ trợ tiếng Việt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+    <!-- Thư viện bên ngoài: nạp TRƯỚC design system để CSS dự án thắng cascade -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <!-- Design system của dự án; css/thu-vien.css là lớp cầu nối thư viện -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navy.css">
+    <link rel="stylesheet" href="css/thu-vien.css">
     <script src="js/data.js" defer></script>
     <script src="js/kho-du-lieu.js" defer></script>
     <script src="js/logic.js" defer></script>
-    <script src="js/features.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countup.umd.js" defer></script>
+    <script src="js/giao-dien.js" defer></script>
+    <script src="js/thu-vien.js" defer></script>
+    <script src="js/trang/chuc-vu.js" defer></script>
   </head>
-  <body>
+  <body class="giao-dien-navy">
     <a class="skip-link" href="#noi-dung-chinh">Bỏ qua tới nội dung</a>
-    <svg class="icon-sprite" aria-hidden="true" focusable="false">
-      <symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z"/></symbol>
-      <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4ZM8 10a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm8 3c-3.31 0-6 1.79-6 4v3h12v-3c0-2.21-2.69-4-6-4ZM8 13c-2.76 0-5 1.57-5 3.5V20h5v-2c0-1.18.48-2.25 1.28-3.08A6.4 6.4 0 0 0 8 13Z"/></symbol>
-      <symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M3 6a3 3 0 0 1 3-3h12v3H6a1 1 0 0 0 0 2h15v12H6a3 3 0 0 1-3-3V6Zm14 6v3h4v-3h-4Z"/></symbol>
-      <symbol id="icon-building" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M9 7h2m-2 4h2m-2 4h2m-2 4h2m5-8h4a2 2 0 0 1 2 2v6h-6m2-4h2"/></symbol>
-      <symbol id="icon-briefcase" viewBox="0 0 24 24"><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M4 7h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm0 5 8 3 8-3"/></symbol>
-      <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
-      <symbol id="icon-theme" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9 1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9 1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></symbol>
-    </svg>
 
     <!-- Khối đầu trang: nhận diện hệ thống và thao tác dùng chung. -->
     <header>
       <button class="nut nut-nho nut-vien nut-thu-gon-sidebar" id="nut-thu-gon-sidebar" type="button" aria-label="Thu gọn hoặc mở rộng thanh điều hướng" aria-expanded="true">
-        <svg class="icon" aria-hidden="true"><use href="#icon-menu"></use></svg>
+        <i class="bi bi-list" aria-hidden="true"></i>
         <span class="sr-only">Thu gọn thanh điều hướng</span>
       </button>
-      <form role="search" action="#" method="get">
+      <form role="search" action="#" method="get" id="global-search-form">
         <label class="sr-only" for="global-search">Tìm kiếm nhanh</label>
-        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
-        <button class="nut nut-nho" type="submit">Tìm</button>
+        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên, phòng ban, chức vụ..." autocomplete="off">
+        <div id="live-search-results" class="search-dropdown-menu" hidden></div>
+        <button class="nut nut-nho" type="submit"><i class="bi bi-search" aria-hidden="true"></i> Tìm</button>
       </form>
-      <button class="nut nut-nho" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối">Giao diện tối</button>
+      <div class="cong-cu-tong-quan">
+        <div class="dropdown menu-du-lieu">
+          <button class="nut nut-nho nut-vien dropdown-toggle" id="nut-menu-du-lieu" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dữ liệu</button>
+          <ul class="dropdown-menu tuy-chon-du-lieu dropdown-menu-end" aria-labelledby="nut-menu-du-lieu">
+            <li>
+              <button class="nut nut-nho nut-vien" id="nut-backup-json" type="button"><i class="bi bi-download" aria-hidden="true"></i> Sao lưu JSON</button>
+            </li>
+            <li>
+              <button class="nut nut-nho nut-vien" id="nut-restore-json" type="button"><i class="bi bi-upload" aria-hidden="true"></i> Khôi phục JSON</button>
+            </li>
+          </ul>
+        </div>
+        <input type="file" id="file-restore-json" accept=".json" hidden>
+        <button class="nut nut-nho nut-vien" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối"><i class="bi bi-moon-stars" aria-hidden="true"></i> Giao diện tối</button>
+      </div>
     </header>
 
     <!-- Điều hướng chính -->
     <nav aria-label="Điều hướng chính">
       <span class="nav-brand"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></span>
       <ul>
-        <li><a href="index.html" title="Tổng quan"><svg class="icon" aria-hidden="true"><use href="#icon-dashboard"></use></svg><span class="nav-text">Tổng quan</span></a></li>
-        <li><a href="nhan-vien.html" title="Nhân viên"><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg><span class="nav-text">Nhân viên</span></a></li>
-        <li><a href="bang-luong.html" title="Bảng lương"><svg class="icon" aria-hidden="true"><use href="#icon-wallet"></use></svg><span class="nav-text">Bảng lương</span></a></li>
-        <li><a href="phong-ban.html" title="Phòng ban"><svg class="icon" aria-hidden="true"><use href="#icon-building"></use></svg><span class="nav-text">Phòng ban</span></a></li>
-        <li><a href="chuc-vu.html" aria-current="page" title="Chức vụ"><svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg><span class="nav-text">Chức vụ</span></a></li>
+        <li>
+          <a href="index.html" title="Tổng quan">
+            <i class="bi bi-speedometer2" aria-hidden="true"></i>
+            <span class="nav-text">Tổng quan</span>
+          </a>
+        </li>
+        <li>
+          <a href="nhan-vien.html" title="Nhân viên">
+            <i class="bi bi-people" aria-hidden="true"></i>
+            <span class="nav-text">Nhân viên</span>
+          </a>
+        </li>
+        <li>
+          <a href="cham-cong.html" title="Chấm công">
+            <i class="bi bi-calendar-week" aria-hidden="true"></i>
+            <span class="nav-text">Chấm công</span>
+          </a>
+        </li>
+        <li>
+          <a href="nghi-phep.html" title="Nghỉ phép">
+            <i class="bi bi-calendar2-check" aria-hidden="true"></i>
+            <span class="nav-text">Nghỉ phép</span>
+          </a>
+        </li>
+        <li>
+          <a href="bang-luong.html" title="Bảng lương">
+            <i class="bi bi-wallet2" aria-hidden="true"></i>
+            <span class="nav-text">Bảng lương</span>
+          </a>
+        </li>
+        <li>
+          <a href="khen-thuong.html" title="Khen thưởng">
+            <i class="bi bi-award" aria-hidden="true"></i>
+            <span class="nav-text">Khen thưởng</span>
+          </a>
+        </li>
+        <li>
+          <a href="phong-ban.html" title="Phòng ban">
+            <i class="bi bi-building" aria-hidden="true"></i>
+            <span class="nav-text">Phòng ban</span>
+          </a>
+        </li>
+        <li>
+          <a href="chuc-vu.html" aria-current="page" title="Chức vụ">
+            <i class="bi bi-briefcase" aria-hidden="true"></i>
+            <span class="nav-text">Chức vụ</span>
+          </a>
+        </li>
       </ul>
     </nav>
 
     <!-- Nội dung chính -->
     <main id="noi-dung-chinh" class="trang-chuc-vu">
-      <h1 class="tieu-de animate__animated animate__fadeInDown">Quản lý chức vụ</h1>
+      <div class="dau-trang-navy">
+        <div>
+          <p class="nhan-trang-navy">Cơ cấu tổ chức</p>
+          <h1 class="tieu-de">Quản lý chức vụ</h1>
+          <p class="mo-ta-trang-navy">Quản lý danh mục chức vụ và xem số nhân viên đang đảm nhiệm.</p>
+        </div>
+        <button class="nut" id="nut-them-chuc-vu" type="button">Thêm chức vụ mới</button>
+      </div>
 
       <!-- Thanh công cụ & Thống kê -->
-      <section class="the" aria-labelledby="chuc-vu-toolbar-heading">
+      <section class="the" aria-labelledby="chuc-vu-toolbar-heading" data-aos="fade-up">
         <h2 id="chuc-vu-toolbar-heading" class="sr-only">Công cụ quản lý chức vụ</h2>
         <div class="thanh-cong-cu">
-          <div>
-            <button class="nut" id="nut-them-chuc-vu" type="button">Thêm chức vụ mới</button>
-          </div>
           <p id="chuc-vu-thong-bao" aria-live="polite">Đang tải dữ liệu chức vụ...</p>
         </div>
         <dl class="thong-ke">
@@ -81,7 +150,7 @@
       </section>
 
       <!-- Bảng danh mục chức vụ -->
-      <section class="the" aria-labelledby="chuc-vu-heading">
+      <section class="the" aria-labelledby="chuc-vu-heading" data-aos="fade-up" data-aos-delay="100">
         <h2 id="chuc-vu-heading">Danh mục chức vụ</h2>
         <div class="bang-cuon">
           <table id="bang-chuc-vu">

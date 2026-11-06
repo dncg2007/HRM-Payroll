@@ -1,6 +1,24 @@
-# Design System — Giai đoạn 2A
+# Design System — Giai đoạn 2A (cập nhật khi tích hợp thư viện)
 
-Design System của HRM & Payroll dùng CSS custom properties theo **vai trò sử dụng**, không đặt tên theo màu cụ thể. Chế độ Tối chỉ ghi đè giá trị token trong `body:has(#che-do-toi:checked)`; chưa dùng JavaScript.
+Design System của HRM & Payroll dùng CSS custom properties theo **vai trò sử dụng**, không đặt tên theo màu cụ thể. Chế độ Tối được điều khiển bằng thuộc tính `data-theme="dark"` trên `<html>` (js/theme.js), đồng bộ cả dark mode của Bootstrap 5.3 qua `data-bs-theme`.
+
+## Nguồn palette (Adobe Color)
+
+Bảng màu gốc dùng navy `#1F509E` làm màu chủ đạo. Khi tích hợp thư viện, bộ màu được tinh chỉnh theo quy tắc **harmony của Adobe Color** (color.adobe.com):
+
+| Vai trò | Mã màu | Quy tắc harmony |
+|---|---|---|
+| Primary (nền navy) | `#1F509E` | Màu gốc |
+| Analogous sáng | `#3D7BD9` | Kề bên màu gốc trên vòng màu |
+| Complementary (accent) | `#E6A811` (`--mau-phu`) | Đối bổ trên vòng màu |
+| Nền sidebar navy đậm | `#112D50` | Shade của màu gốc |
+
+Cặp màu này được đóng gói thành token gradient:
+
+| Token | Giá trị Sáng | Giá trị Tối | Dùng cho |
+|---|---|---|---|
+| `--gradient-chinh` | `linear-gradient(135deg, #1F509E, #3D7BD9)` | `linear-gradient(135deg, #7FA8EF, #4A76C9)` | `.logo-mark`, hover nút `.nut`, icon slide carousel |
+| `--gradient-navy` | `linear-gradient(160deg, #112D50, #1F509E)` | `linear-gradient(160deg, #0E1726, #1C4270)` | Dự phòng cho nền navy lớn |
 
 ## Bảng token
 
@@ -29,7 +47,7 @@ Design System của HRM & Payroll dùng CSS custom properties theo **vai trò s�
 | `--cach-4` | `24px` | `24px` | Khoảng cách giữa nhóm nội dung |
 | `--cach-5` | `32px` | `32px` | Khoảng cách khu vực |
 | `--cach-6` | `48px` | `48px` | Khoảng cách lớn giữa vùng chính |
-| `--font` | System font stack | System font stack | Font chữ không phụ thuộc dịch vụ ngoài |
+| `--font` | `"Be Vietnam Pro", system font stack` | `"Be Vietnam Pro", system font stack` | Font thương hiệu tải từ Google Fonts, tự hạ về font hệ thống khi offline |
 | `--co-nho` | `0.875rem` | `0.875rem` | Chú thích và nội dung phụ |
 | `--co-thuong` | `1rem` | `1rem` | Kích thước văn bản mặc định |
 | `--co-to` | `1.25rem` | `1.25rem` | Heading cấp 2 hoặc nội dung nổi bật |

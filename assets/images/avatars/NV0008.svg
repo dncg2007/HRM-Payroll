@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Ảnh đại diện NV0008">
+  <circle cx="128" cy="128" r="128" fill="#efe9f6"/>
+  <rect x="112" y="146" width="32" height="42" rx="13" fill="#efc39c"/>
+  <path d="M112 166 q16 10 32 0 v8 q-16 9 -32 0 z" fill="#d9a071" opacity="0.35"/>
+  <path d="M36 256 C36 198 82 174 128 174 C174 174 220 198 220 256 Z" fill="#52677a"/>
+  <path d="M106 178 L128 200 L150 178 C144 174 136 172 128 172 C120 172 112 174 106 178 Z" fill="#ffffff" opacity="0.25"/>
+  <ellipse cx="128" cy="108" rx="41" ry="45" fill="#efc39c"/>
+  <ellipse cx="87" cy="110" rx="7" ry="10" fill="#efc39c"/>
+  <ellipse cx="169" cy="110" rx="7" ry="10" fill="#efc39c"/>
+  <path d="M87 106 C84 62 104 52 128 52 C152 52 172 62 169 106 C166 88 156 78 128 78 C100 78 90 88 87 106 Z" fill="#2c231c"/>
+  <ellipse cx="107" cy="124" rx="6" ry="4" fill="#e8927c" opacity="0.30"/>
+  <ellipse cx="149" cy="124" rx="6" ry="4" fill="#e8927c" opacity="0.30"/>
+  <circle cx="113" cy="112" r="4.5" fill="#33261f"/>
+  <circle cx="143" cy="112" r="4.5" fill="#33261f"/>
+  <rect x="107" y="101" width="13" height="3" rx="1.5" fill="#33261f" opacity="0.75"/>
+  <rect x="137" y="101" width="13" height="3" rx="1.5" fill="#33261f" opacity="0.75"/>
+  <path d="M118 130 q10 8 20 0" stroke="#b0654a" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+  <path d="M124 118 q4 3 8 0" stroke="#d9a071" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.55"/>
+</svg>

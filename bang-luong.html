@@ -6,72 +6,200 @@
     <title>Bảng lương | HRM &amp; Payroll</title>
     <meta name="description" content="Theo dõi ngày công, lương, phụ cấp và tổng quỹ lương theo tháng.">
     <script src="js/theme.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Google Fonts: Be Vietnam Pro — bộ font thương hiệu hỗ trợ tiếng Việt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+    <!-- Thư viện bên ngoài: nạp TRƯỚC design system để CSS dự án thắng cascade -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <!-- Design system của dự án; css/thu-vien.css là lớp cầu nối thư viện -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navy.css">
+    <link rel="stylesheet" href="css/thu-vien.css">
     <script src="js/data.js" defer></script>
     <script src="js/kho-du-lieu.js" defer></script>
     <script src="js/logic.js" defer></script>
-    <script src="js/features.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countup.umd.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js" defer></script>
+    <script src="js/giao-dien.js" defer></script>
+    <script src="js/thu-vien.js" defer></script>
+    <script src="js/trang/bang-luong.js" defer></script>
   </head>
-  <body>
+  <body class="giao-dien-navy">
     <a class="skip-link" href="#noi-dung-chinh">Bỏ qua tới nội dung</a>
-    <svg class="icon-sprite" aria-hidden="true" focusable="false">
-      <symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6V11h-6v9Zm0-16v5h6V4h-6Z"/></symbol>
-      <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4ZM8 10a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm8 3c-3.31 0-6 1.79-6 4v3h12v-3c0-2.21-2.69-4-6-4ZM8 13c-2.76 0-5 1.57-5 3.5V20h5v-2c0-1.18.48-2.25 1.28-3.08A6.4 6.4 0 0 0 8 13Z"/></symbol>
-      <symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M3 6a3 3 0 0 1 3-3h12v3H6a1 1 0 0 0 0 2h15v12H6a3 3 0 0 1-3-3V6Zm14 6v3h4v-3h-4Z"/></symbol>
-      <symbol id="icon-building" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M9 7h2m-2 4h2m-2 4h2m-2 4h2m5-8h4a2 2 0 0 1 2 2v6h-6m2-4h2"/></symbol>
-      <symbol id="icon-briefcase" viewBox="0 0 24 24"><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M4 7h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm0 5 8 3 8-3"/></symbol>
-      <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
-      <symbol id="icon-theme" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9 1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9 1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></symbol>
-    </svg>
     <!-- Khối đầu trang: nhận diện hệ thống và thao tác dùng chung. -->
     <header>
       <button class="nut nut-nho nut-vien nut-thu-gon-sidebar" id="nut-thu-gon-sidebar" type="button" aria-label="Thu gọn hoặc mở rộng thanh điều hướng" aria-expanded="true">
-        <svg class="icon" aria-hidden="true"><use href="#icon-menu"></use></svg>
+        <i class="bi bi-list" aria-hidden="true"></i>
         <span class="sr-only">Thu gọn thanh điều hướng</span>
       </button>
-      <!-- Form tìm kiếm dùng chung cho các màn hình; hành vi sẽ bổ sung ở giai đoạn sau. -->
-      <form role="search" action="#" method="get">
+      <form role="search" action="#" method="get" id="global-search-form">
         <label class="sr-only" for="global-search">Tìm kiếm nhanh</label>
-        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên hoặc phòng ban">
-        <button class="nut nut-nho" type="submit">Tìm</button>
+        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên, phòng ban, chức vụ..." autocomplete="off">
+        <div id="live-search-results" class="search-dropdown-menu" hidden></div>
+        <button class="nut nut-nho" type="submit"><i class="bi bi-search" aria-hidden="true"></i> Tìm</button>
       </form>
-      <!-- Nút dùng theme.js và data-theme để đổi giao diện, script không defer nhằm tránh nháy màu. -->
-      <button class="nut nut-nho" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối">Giao diện tối</button>
+      <div class="cong-cu-tong-quan">
+        <div class="dropdown menu-du-lieu">
+          <button class="nut nut-nho nut-vien dropdown-toggle" id="nut-menu-du-lieu" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dữ liệu</button>
+          <ul class="dropdown-menu tuy-chon-du-lieu dropdown-menu-end" aria-labelledby="nut-menu-du-lieu">
+            <li>
+              <button class="nut nut-nho nut-vien" id="nut-backup-json" type="button"><i class="bi bi-download" aria-hidden="true"></i> Sao lưu JSON</button>
+            </li>
+            <li>
+              <button class="nut nut-nho nut-vien" id="nut-restore-json" type="button"><i class="bi bi-upload" aria-hidden="true"></i> Khôi phục JSON</button>
+            </li>
+          </ul>
+        </div>
+        <input type="file" id="file-restore-json" accept=".json" hidden>
+        <button class="nut nut-nho nut-vien" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối"><i class="bi bi-moon-stars" aria-hidden="true"></i> Giao diện tối</button>
+      </div>
     </header>
 
     <!-- Điều hướng chính: đánh dấu trang hiện tại bằng aria-current. -->
     <nav aria-label="Điều hướng chính">
       <span class="nav-brand"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></span>
       <ul>
-        <li><a href="index.html" title="Tổng quan"><svg class="icon" aria-hidden="true"><use href="#icon-dashboard"></use></svg><span class="nav-text">Tổng quan</span></a></li>
-        <li><a href="nhan-vien.html" title="Nhân viên"><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg><span class="nav-text">Nhân viên</span></a></li>
-        <li><a href="bang-luong.html" aria-current="page" title="Bảng lương"><svg class="icon" aria-hidden="true"><use href="#icon-wallet"></use></svg><span class="nav-text">Bảng lương</span></a></li>
-        <li><a href="phong-ban.html" title="Phòng ban"><svg class="icon" aria-hidden="true"><use href="#icon-building"></use></svg><span class="nav-text">Phòng ban</span></a></li>
-        <li><a href="chuc-vu.html" title="Chức vụ"><svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg><span class="nav-text">Chức vụ</span></a></li>
+        <li>
+          <a href="index.html" title="Tổng quan">
+            <i class="bi bi-speedometer2" aria-hidden="true"></i>
+            <span class="nav-text">Tổng quan</span>
+          </a>
+        </li>
+        <li>
+          <a href="nhan-vien.html" title="Nhân viên">
+            <i class="bi bi-people" aria-hidden="true"></i>
+            <span class="nav-text">Nhân viên</span>
+          </a>
+        </li>
+        <li>
+          <a href="cham-cong.html" title="Chấm công">
+            <i class="bi bi-calendar-week" aria-hidden="true"></i>
+            <span class="nav-text">Chấm công</span>
+          </a>
+        </li>
+        <li>
+          <a href="nghi-phep.html" title="Nghỉ phép">
+            <i class="bi bi-calendar2-check" aria-hidden="true"></i>
+            <span class="nav-text">Nghỉ phép</span>
+          </a>
+        </li>
+        <li>
+          <a href="bang-luong.html" aria-current="page" title="Bảng lương">
+            <i class="bi bi-wallet2" aria-hidden="true"></i>
+            <span class="nav-text">Bảng lương</span>
+          </a>
+        </li>
+        <li>
+          <a href="khen-thuong.html" title="Khen thưởng">
+            <i class="bi bi-award" aria-hidden="true"></i>
+            <span class="nav-text">Khen thưởng</span>
+          </a>
+        </li>
+        <li>
+          <a href="phong-ban.html" title="Phòng ban">
+            <i class="bi bi-building" aria-hidden="true"></i>
+            <span class="nav-text">Phòng ban</span>
+          </a>
+        </li>
+        <li>
+          <a href="chuc-vu.html" title="Chức vụ">
+            <i class="bi bi-briefcase" aria-hidden="true"></i>
+            <span class="nav-text">Chức vụ</span>
+          </a>
+        </li>
       </ul>
     </nav>
 
     <!-- Nội dung chính của trang bảng lương. -->
     <main id="noi-dung-chinh" class="trang-bang-luong">
-      <h1 class="tieu-de animate__animated animate__fadeInDown">Bảng lương</h1>
+      <div class="dau-trang-navy">
+        <div>
+          <p class="nhan-trang-navy">Tiền lương</p>
+          <h1 class="tieu-de">Bảng lương</h1>
+          <p class="mo-ta-trang-navy">Đối chiếu ngày công, tổng thực lĩnh và phiếu lương từng nhân viên.</p>
+        </div>
+      </div>
 
       <!-- Bộ chọn tháng: xác định kỳ lương cần xem. -->
-      <section class="khu-chon-thang the" aria-labelledby="month-selector-heading">
-        <h2 id="month-selector-heading">Chọn tháng tính lương</h2>
+      <section class="khu-chon-thang the" aria-labelledby="month-selector-heading" data-aos="fade-up">
+        <div class="dau-khu-luong">
+          <h2 id="month-selector-heading">Chọn kỳ lương</h2>
+          <div class="tong-thuc-linh">
+            <span>Tổng thực lĩnh</span>
+            <strong id="tong-thuc-linh-ky" aria-live="polite">0 đ</strong>
+          </div>
+        </div>
         <form id="form-bang-luong" action="#salary-table" method="get" aria-label="Bộ lọc bảng lương">
-          <label for="salary-month">Tháng</label>
-          <input id="salary-month" name="salary-month" type="month" value="2026-10" required>
-          <label for="salary-department">Phòng ban</label>
-          <select id="salary-department" name="salary-department">
-            <option value="">Tất cả phòng ban</option>
-          </select>
+          <div class="truong-loc">
+            <label for="salary-month">Tháng</label>
+            <input id="salary-month" name="salary-month" type="month" value="2026-10" required>
+          </div>
+          <div class="truong-loc">
+            <label for="salary-department">Phòng ban</label>
+            <select id="salary-department" name="salary-department">
+              <option value="">Tất cả phòng ban</option>
+            </select>
+          </div>
           <button class="nut" type="submit">Tính lương</button>
+          <button class="nut nut-vien" id="nut-in-bang-luong" type="button">In bảng lương</button>
+          <button class="nut nut-vien" id="nut-xuat-excel-bl" type="button">Xuất CSV</button>
         </form>
       </section>
 
+      <!-- Accordion giải thích cách tính lương (Bootstrap Accordion) -->
+      <section class="the khu-huong-dan-luong" aria-labelledby="huong-dan-luong-heading" data-aos="fade-up">
+        <h2 id="huong-dan-luong-heading"><i class="bi bi-calculator" aria-hidden="true"></i> Cách tính lương</h2>
+        <div class="accordion accordion-hrm" id="huong-dan-luong">
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#hd-ngay-cong" aria-expanded="true" aria-controls="hd-ngay-cong">
+                <i class="bi bi-calendar3" aria-hidden="true"></i> Ngày công chuẩn và ngày công tính lương
+              </button>
+            </h3>
+            <div id="hd-ngay-cong" class="accordion-collapse collapse show" data-bs-parent="#huong-dan-luong">
+              <div class="accordion-body">
+                Ngày công chuẩn là số ngày từ <strong>thứ Hai đến thứ Sáu</strong> trong tháng đã chọn. Ngày công của từng nhân viên được tính trong thời gian
+                <strong>hợp đồng có hiệu lực</strong>, ưu tiên theo thứ tự: chấm công đã lưu → dữ liệu công mẫu → lịch làm việc trong thời hạn hợp đồng.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hd-cong-thuc" aria-expanded="false" aria-controls="hd-cong-thuc">
+                <i class="bi bi-calculator" aria-hidden="true"></i> Công thức thực lĩnh
+              </button>
+            </h3>
+            <div id="hd-cong-thuc" class="accordion-collapse collapse" data-bs-parent="#huong-dan-luong">
+              <div class="accordion-body">
+                <strong>Thực lĩnh = Lương theo ngày công + Phụ cấp + Thưởng − Phạt − Bảo hiểm (10,5% mô phỏng)</strong>.
+                Trong đó: Lương theo ngày công = Mức lương ÷ Ngày công chuẩn × Ngày công thực tế. Nhân viên thực tập 6 tháng đầu hưởng 70% mức lương (giảm 30%).
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hd-muc-luong" aria-expanded="false" aria-controls="hd-muc-luong">
+                <i class="bi bi-mortarboard" aria-hidden="true"></i> Ưu tiên mức lương trong kỳ
+              </button>
+            </h3>
+            <div id="hd-muc-luong" class="accordion-collapse collapse" data-bs-parent="#huong-dan-luong">
+              <div class="accordion-body">
+                Hệ thống ưu tiên <strong>mức lương có hiệu lực trong kỳ lương</strong> (dòng chưa có ngày kết thúc). Khi chưa có mức nào hiệu lực,
+                bảng lương dùng <strong>lương đề xuất</strong> ban đầu của hồ sơ nhân viên và gắn nhãn "Đề xuất" để dễ nhận biết.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Bảng dữ liệu: div chỉ bọc bảng để hỗ trợ cuộn ngang khi màn hình hẹp. -->
-      <section class="khu-bang" id="salary-table" aria-labelledby="salary-table-heading">
+      <section class="khu-bang the" id="salary-table" aria-labelledby="salary-table-heading" data-aos="fade-up">
         <h2 id="salary-table-heading">Bảng chấm công và lương tháng 10/2026</h2>
         <p id="salary-result" aria-live="polite">Chưa tải bảng lương.</p>
         <!-- GĐ3 sẽ bật tắt hidden bằng JavaScript; gỡ hidden trong DevTools để xem thử. -->
@@ -88,42 +216,102 @@
                 <th scope="col">Lương cơ bản</th>
                 <th scope="col">Phụ cấp</th>
                 <th scope="col">Thực lĩnh</th>
+                <th scope="col" class="cot-thao-tac">Thao tác</th>
               </tr>
             </thead>
             <tbody id="than-bang-luong">
               <tr>
-                <td colspan="7" data-cot="Kết quả" class="khong-co-du-lieu">Đang tính toán bảng lương...</td>
+                <td colspan="8" data-cot="Kết quả" class="khong-co-du-lieu">Đang tính toán bảng lương...</td>
               </tr>
             </tbody>
             <tfoot>
               <tr id="tong-bang-luong">
                 <th scope="row" colspan="6">Tổng quỹ lương</th>
                 <td class="so-tien" data-cot="Tổng quỹ lương">0 đ</td>
+                <td class="cot-thao-tac"></td>
               </tr>
             </tfoot>
           </table>
         </div>
+
+        <!-- Khối chữ ký xuất hiện khi in bảng lương tổng hợp -->
+        <div class="chu-ky-in-bang-luong" aria-hidden="true">
+          <div class="cot-ky">
+            <p class="chuc-danh">Người lập biểu</p>
+            <div class="khoang-trong-ky"></div>
+            <p class="ky-ten">(Ký và ghi rõ họ tên)</p>
+          </div>
+          <div class="cot-ky">
+            <p class="chuc-danh">Kế toán trưởng</p>
+            <div class="khoang-trong-ky"></div>
+            <p class="ky-ten">(Ký và ghi rõ họ tên)</p>
+          </div>
+          <div class="cot-ky">
+            <p class="chuc-danh">Giám đốc duyệt</p>
+            <div class="khoang-trong-ky"></div>
+            <p class="ky-ten">(Ký tên và đóng dấu)</p>
+          </div>
+        </div>
       </section>
 
-      <!-- Phiếu lương: bản xem trước thông tin chi tiết của một nhân viên. -->
-      <aside class="phieu-luong" aria-labelledby="payslip-heading">
+      <!-- Phiếu lương cá nhân: hiển thị động theo nhân viên được chọn -->
+      <aside class="phieu-luong" id="phieu-luong-ca-nhan" aria-labelledby="payslip-heading" tabindex="-1">
         <h2 id="payslip-heading">Phiếu lương cá nhân</h2>
-        <article class="the animate__animated animate__fadeInRight">
-          <h3>Nguyễn Minh Anh — Tháng 06/2025</h3>
-          <dl>
+        <article class="the animate__animated animate__fadeInRight" id="khung-phieu-luong">
+          <div class="phieu-luong-header">
+            <p class="phieu-cong-ty">DOANH NGHIỆP HRM &amp; PAYROLL</p>
+            <h3 id="phieu-tieu-de">Phiếu lương tháng 10/2026</h3>
+            <p class="phieu-nhan-vien" id="phieu-ho-ten">Đang chọn nhân viên...</p>
+          </div>
+          <dl id="phieu-chi-tiet">
+            <dt>Mã nhân viên</dt>
+            <dd id="phieu-ma-nv">—</dd>
+            <dt>Phòng ban</dt>
+            <dd id="phieu-phong-ban">—</dd>
+            <dt>Chức vụ</dt>
+            <dd id="phieu-chuc-vu">—</dd>
             <dt>Ngày công</dt>
-            <dd>26 ngày</dd>
+            <dd id="phieu-ngay-cong">—</dd>
             <dt>Lương cơ bản</dt>
-            <dd>24.000.000 VNĐ</dd>
+            <dd id="phieu-luong-cb" class="so-tien">—</dd>
+            <dt>Lương theo ngày công</dt>
+            <dd id="phieu-luong-cong" class="so-tien">—</dd>
             <dt>Tổng phụ cấp</dt>
-            <dd>2.000.000 VNĐ</dd>
-            <dt>Thực lĩnh</dt>
-            <dd>26.000.000 VNĐ</dd>
+            <dd id="phieu-phu-cap" class="so-tien">—</dd>
+            <dt>Khen thưởng / Kỷ luật</dt>
+            <dd id="phieu-thuong-phat" class="so-tien">—</dd>
+            <dt>Bảo hiểm (10.5%)</dt>
+            <dd id="phieu-bao-hiem" class="so-tien">—</dd>
+            <dt class="dong-thuc-linh"><strong>Thực lĩnh</strong></dt>
+            <dd id="phieu-thuc-linh" class="so-tien dong-thuc-linh"><strong>—</strong></dd>
           </dl>
-          <p>Phiếu lương đang ở dạng bản xem trước tĩnh.</p>
-          <button class="nut" type="button">In</button>
+          <div class="phieu-bang-chu">
+            <p><strong>Bằng chữ:</strong> <span id="phieu-chu-so">Không đồng chẵn.</span></p>
+          </div>
+          <div class="phieu-chu-ky">
+            <div class="cot-ky">
+              <p class="chuc-danh">Người lập phiếu</p>
+              <div class="khoang-trong-ky"></div>
+              <p class="ky-ten">(Ký, họ tên)</p>
+            </div>
+            <div class="cot-ky">
+              <p class="chuc-danh">Người lao động</p>
+              <div class="khoang-trong-ky"></div>
+              <p class="ky-ten">(Ký, họ tên)</p>
+            </div>
+          </div>
+          <div class="hang-nut-phieu">
+            <button class="nut" id="nut-in-phieu" type="button">In phiếu lương</button>
+          </div>
         </article>
       </aside>
+
+      <!-- Biểu đồ xu hướng quỹ lương 6 tháng (Chart.js) -->
+      <section class="the khu-chart-quy-luong" aria-labelledby="chart-quy-luong-heading" data-aos="fade-up">
+        <h2 id="chart-quy-luong-heading"><i class="bi bi-graph-up-arrow" aria-hidden="true"></i> Xu hướng quỹ lương 6 tháng</h2>
+        <p id="chart-quy-luong-mo-ta" class="mo-ta-trang-navy">Tổng thực lĩnh của toàn bộ nhân viên theo kỳ lương.</p>
+        <div id="khung-chart-quy-luong" class="khung-chart khung-chart-cao"></div>
+      </section>
     </main>
 
     <!-- Chân trang: thông tin liên hệ và bản quyền dự án. -->

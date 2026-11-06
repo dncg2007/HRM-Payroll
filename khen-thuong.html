@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Khen thưởng &amp; Kỷ luật | HRM &amp; Payroll</title>
+    <meta name="description" content="Quản lý các quyết định khen thưởng, kỷ luật nhân viên và đồng bộ với bảng lương.">
+    <script src="js/theme.js"></script>
+    <!-- Google Fonts: Be Vietnam Pro — bộ font thương hiệu hỗ trợ tiếng Việt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+    <!-- Thư viện bên ngoài: nạp TRƯỚC design system để CSS dự án thắng cascade -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <!-- Design system của dự án; css/thu-vien.css là lớp cầu nối thư viện -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navy.css">
+    <link rel="stylesheet" href="css/thu-vien.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/kho-du-lieu.js" defer></script>
+    <script src="js/logic.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countup.umd.js" defer></script>
+    <script src="js/giao-dien.js" defer></script>
+    <script src="js/thu-vien.js" defer></script>
+    <script src="js/trang/khen-thuong.js" defer></script>
+  </head>
+  <body class="giao-dien-navy">
+    <a class="skip-link" href="#noi-dung-chinh">Bỏ qua tới nội dung</a>
+
+    <header>
+      <button class="nut nut-nho nut-vien nut-thu-gon-sidebar" id="nut-thu-gon-sidebar" type="button" aria-label="Thu gọn hoặc mở rộng thanh điều hướng" aria-expanded="true">
+        <i class="bi bi-list" aria-hidden="true"></i>
+        <span class="sr-only">Thu gọn thanh điều hướng</span>
+      </button>
+      <form role="search" action="#" method="get" id="global-search-form">
+        <label class="sr-only" for="global-search">Tìm kiếm nhanh</label>
+        <input id="global-search" name="q" type="search" placeholder="Tìm nhân viên, phòng ban, chức vụ..." autocomplete="off">
+        <div id="live-search-results" class="search-dropdown-menu" hidden></div>
+        <button class="nut nut-nho" type="submit"><i class="bi bi-search" aria-hidden="true"></i> Tìm</button>
+      </form>
+      <div class="cong-cu-tong-quan">
+        <div class="dropdown menu-du-lieu">
+          <button class="nut nut-nho nut-vien dropdown-toggle" id="nut-menu-du-lieu" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dữ liệu</button>
+          <ul class="dropdown-menu tuy-chon-du-lieu dropdown-menu-end" aria-labelledby="nut-menu-du-lieu">
+            <li>
+              <button class="nut nut-nho nut-vien" id="nut-backup-json" type="button"><i class="bi bi-download" aria-hidden="true"></i> Sao lưu JSON</button>
+            </li>
+            <li>
+              <button class="nut nut-nho nut-vien" id="nut-restore-json" type="button"><i class="bi bi-upload" aria-hidden="true"></i> Khôi phục JSON</button>
+            </li>
+          </ul>
+        </div>
+        <input type="file" id="file-restore-json" accept=".json" hidden>
+        <button class="nut nut-nho nut-vien" id="nut-doi-giao-dien" type="button" aria-pressed="false" aria-label="Chuyển sang giao diện tối"><i class="bi bi-moon-stars" aria-hidden="true"></i> Giao diện tối</button>
+      </div>
+    </header>
+
+    <nav aria-label="Điều hướng chính">
+      <span class="nav-brand"><span class="logo-mark" aria-hidden="true">H</span><span>HRM &amp; Payroll</span></span>
+      <ul>
+        <li>
+          <a href="index.html" title="Tổng quan">
+            <i class="bi bi-speedometer2" aria-hidden="true"></i>
+            <span class="nav-text">Tổng quan</span>
+          </a>
+        </li>
+        <li>
+          <a href="nhan-vien.html" title="Nhân viên">
+            <i class="bi bi-people" aria-hidden="true"></i>
+            <span class="nav-text">Nhân viên</span>
+          </a>
+        </li>
+        <li>
+          <a href="cham-cong.html" title="Chấm công">
+            <i class="bi bi-calendar-week" aria-hidden="true"></i>
+            <span class="nav-text">Chấm công</span>
+          </a>
+        </li>
+        <li>
+          <a href="nghi-phep.html" title="Nghỉ phép">
+            <i class="bi bi-calendar2-check" aria-hidden="true"></i>
+            <span class="nav-text">Nghỉ phép</span>
+          </a>
+        </li>
+        <li>
+          <a href="bang-luong.html" title="Bảng lương">
+            <i class="bi bi-wallet2" aria-hidden="true"></i>
+            <span class="nav-text">Bảng lương</span>
+          </a>
+        </li>
+        <li>
+          <a href="khen-thuong.html" aria-current="page" title="Khen thưởng">
+            <i class="bi bi-award" aria-hidden="true"></i>
+            <span class="nav-text">Khen thưởng</span>
+          </a>
+        </li>
+        <li>
+          <a href="phong-ban.html" title="Phòng ban">
+            <i class="bi bi-building" aria-hidden="true"></i>
+            <span class="nav-text">Phòng ban</span>
+          </a>
+        </li>
+        <li>
+          <a href="chuc-vu.html" title="Chức vụ">
+            <i class="bi bi-briefcase" aria-hidden="true"></i>
+            <span class="nav-text">Chức vụ</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main id="noi-dung-chinh" class="trang-khen-thuong">
+      <div class="dau-trang-navy">
+        <div>
+          <p class="nhan-trang-navy">Chính sách nhân sự</p>
+          <h1 class="tieu-de">Khen thưởng &amp; Kỷ luật</h1>
+          <p class="mo-ta-trang-navy">Theo dõi quyết định, tra cứu quy định và đối chiếu các khoản thưởng phạt.</p>
+        </div>
+        <button class="nut" id="nut-them-quyet-dinh" type="button">Thêm quyết định mới</button>
+      </div>
+
+      <!-- Thống kê chỉ số -->
+      <section class="the" aria-labelledby="kt-kpi-heading" data-aos="fade-up">
+        <h2 id="kt-kpi-heading" class="sr-only">Chỉ số khen thưởng kỷ luật</h2>
+        <dl class="thong-ke">
+          <div>
+            <dt>Tổng quyết định</dt>
+            <dd id="thong-ke-kt-tong">0</dd>
+          </div>
+          <div>
+            <dt>Khen thưởng</dt>
+            <dd id="thong-ke-kt-khen">0</dd>
+          </div>
+          <div>
+            <dt>Kỷ luật</dt>
+            <dd id="thong-ke-kt-phat">0</dd>
+          </div>
+          <div>
+            <dt>Tổng tiền thưởng</dt>
+            <dd id="thong-ke-kt-tien-thuong">0 đ</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- Tabs chuyển giữa Danh mục quyết định và Bảng quy định (Bootstrap Tabs) -->
+      <div data-aos="fade-up" data-aos-delay="100">
+        <ul class="nav nav-tabs tabs-hrm" id="tab-khen-thuong" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="tab-quyet-dinh" data-bs-toggle="tab" data-bs-target="#pane-quyet-dinh" type="button" role="tab" aria-controls="pane-quyet-dinh" aria-selected="true">
+              <i class="bi bi-list-check" aria-hidden="true"></i> Danh mục quyết định
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-quy-dinh" data-bs-toggle="tab" data-bs-target="#pane-quy-dinh" type="button" role="tab" aria-controls="pane-quy-dinh" aria-selected="false" tabindex="-1">
+              <i class="bi bi-journal-text" aria-hidden="true"></i> Bảng quy định
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="pane-quyet-dinh" role="tabpanel" aria-labelledby="tab-quyet-dinh" tabindex="0">
+            <section class="the" aria-labelledby="kt-list-heading">
+        <div class="thanh-cong-cu">
+          <div>
+            <h2 id="kt-list-heading">Danh mục quyết định</h2>
+            <p id="kt-dong-ket-qua" aria-live="polite">Hiển thị 0 quyết định</p>
+          </div>
+          <div class="hang-nut-cong-cu">
+            <button class="nut nut-vien" id="nut-xuat-excel-kt" type="button">Xuất CSV</button>
+          </div>
+        </div>
+
+        <form id="form-loc-kt" class="hang-nut-cong-cu bo-loc-danh-sach">
+          <label class="sr-only" for="loc-kt-tu-khoa">Tìm quyết định theo tên hoặc mã nhân viên</label>
+          <input id="loc-kt-tu-khoa" type="search" placeholder="Tìm theo tên hoặc mã NV...">
+          <label class="sr-only" for="loc-kt-loai">Lọc quyết định theo loại</label>
+          <select id="loc-kt-loai">
+            <option value="">Tất cả loại</option>
+            <option value="KhenThuong">Khen thưởng</option>
+            <option value="KyLuat">Kỷ luật</option>
+          </select>
+        </form>
+
+        <div class="bang-cuon">
+          <table id="bang-khen-thuong">
+            <caption>Danh sách quyết định khen thưởng và kỷ luật nhân sự</caption>
+            <thead>
+              <tr>
+                <th scope="col">Mã QĐ</th>
+                <th scope="col">Mã NV</th>
+                <th scope="col">Họ và tên</th>
+                <th scope="col">Phòng ban</th>
+                <th scope="col">Loại</th>
+                <th scope="col">Số tiền</th>
+                <th scope="col">Ngày quyết định</th>
+                <th scope="col">Nội dung / Lý do</th>
+                <th scope="col">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="than-bang-khen-thuong"></tbody>
+          </table>
+        </div>
+            </section>
+          </div>
+
+          <div class="tab-pane fade" id="pane-quy-dinh" role="tabpanel" aria-labelledby="tab-quy-dinh" tabindex="0">
+            <!-- Bảng quy định định mức Khen thưởng & Xử phạt -->
+            <section class="the bang-quy-dinh" aria-labelledby="heading-bang-quy-dinh-kt">
+        <div class="thanh-cong-cu thanh-cong-cu-xuong-dong">
+          <div>
+            <h2 id="heading-bang-quy-dinh-kt">Bảng quy định định mức Khen thưởng &amp; Xử phạt</h2>
+            <p id="dong-ket-qua-quy-dinh" aria-live="polite">Hiển thị 11 quy định chuẩn (Min 500.000 đ – Max 15.000.000 đ, tăng 10%/cấp lỗi)</p>
+          </div>
+          <div class="hang-nut-cong-cu">
+            <button class="nut nut-vien" id="nut-sap-xep-quy-dinh" type="button" data-huong="tang" title="Chuyển đổi sắp xếp theo mức tiền tăng dần hoặc giảm dần">
+              Sắp xếp: Tăng dần (500k ➔ 15M) ⬆
+            </button>
+          </div>
+        </div>
+
+        <form id="form-loc-quy-dinh" class="hang-nut-cong-cu bo-loc-danh-sach">
+          <label class="sr-only" for="loc-quy-dinh-tu-khoa">Tìm quy định theo tên hoặc mã</label>
+          <input id="loc-quy-dinh-tu-khoa" type="search" placeholder="Tìm theo tên hành vi hoặc mã quy định...">
+          <label class="sr-only" for="loc-quy-dinh-loai">Lọc quy định theo loại</label>
+          <select id="loc-quy-dinh-loai">
+            <option value="">Tất cả loại quy chế</option>
+            <option value="KhenThuong">Chỉ Khen thưởng</option>
+            <option value="KyLuat">Chỉ Xử phạt (Kỷ luật)</option>
+          </select>
+        </form>
+
+        <div class="bang-cuon">
+          <table id="bang-danh-muc-quy-dinh">
+            <caption>Khung quy định mức tiền thưởng và phạt theo cấp độ lỗi</caption>
+            <thead>
+              <tr>
+                <th scope="col">Mã QC</th>
+                <th scope="col">Hành vi / Thành tích</th>
+                <th scope="col">Phân loại</th>
+                <th scope="col">Mức cơ sở</th>
+                <th scope="col">Quy tắc tăng lỗi</th>
+                <th scope="col">Mức khi tái phạm (+10%, +20%, +30%)</th>
+                <th scope="col">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="than-bang-quy-dinh"></tbody>
+          </table>
+        </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Dialog thêm quyết định mới -->
+    <dialog id="dialog-them-kt" class="hop-thoai-lon hop-thoai-vua" aria-labelledby="tieu-de-dialog-kt">
+      <form id="form-them-kt" method="dialog">
+        <h2 id="tieu-de-dialog-kt">Thêm quyết định Khen thưởng / Kỷ luật</h2>
+        <div>
+          <label for="kt-ma-qd">Mã quyết định</label>
+          <input id="kt-ma-qd" name="MaQD" type="text" readonly>
+        </div>
+        <div>
+          <label for="kt-nhan-vien">Nhân viên áp dụng</label>
+          <select id="kt-nhan-vien" name="MaNV" required>
+            <option value="">Chọn nhân viên</option>
+          </select>
+        </div>
+        <div>
+          <label for="kt-chon-quy-dinh">Chọn từ Bảng quy định (Tùy chọn tra cứu nhanh)</label>
+          <select id="kt-chon-quy-dinh">
+            <option value="">-- Tự nhập hoặc chọn quy định chuẩn --</option>
+          </select>
+        </div>
+        <div class="luoi-form-hai-cot">
+          <div>
+            <label for="kt-loai">Loại quyết định</label>
+            <select id="kt-loai" name="Loai" required>
+              <option value="KhenThuong">Khen thưởng (+ tiền)</option>
+              <option value="KyLuat">Kỷ luật / Xử phạt (- tiền)</option>
+            </select>
+          </div>
+          <div>
+            <label for="kt-cap-do-loi">Mức độ / Cấp lỗi (Tăng 10%/cấp)</label>
+            <select id="kt-cap-do-loi">
+              <option value="1">Cấp 1: Cơ sở (100%)</option>
+              <option value="2">Cấp 2: Tái phạm lần 1 (+10%)</option>
+              <option value="3">Cấp 3: Tái phạm lần 2 (+20%)</option>
+              <option value="4">Cấp 4: Tái phạm lần 3 (+30%)</option>
+              <option value="5">Cấp 5: Nghiêm trọng (+40%)</option>
+            </select>
+          </div>
+        </div>
+        <div class="luoi-form-hai-cot">
+          <div>
+            <label for="kt-muc-co-so">Mức tiền gốc (đ)</label>
+            <input id="kt-muc-co-so" type="number" min="500000" max="15000000" step="1" required value="500000">
+          </div>
+          <div>
+            <label for="kt-so-tien">Số tiền quyết định (VNĐ)</label>
+            <input id="kt-so-tien" name="SoTien" type="number" value="500000" readonly aria-describedby="kt-goi-y-so-tien">
+            <small class="chu-3 goi-y-truong" id="kt-goi-y-so-tien">Số tiền áp dụng tăng 10% mức gốc cho mỗi cấp sau cấp 1, tối đa 15.000.000 đ.</small>
+          </div>
+        </div>
+        <div>
+          <label for="kt-ngay">Ngày quyết định</label>
+          <input id="kt-ngay" name="NgayQD" type="date" required value="2026-10-30">
+        </div>
+        <div>
+          <label for="kt-ly-do">Nội dung / Căn cứ quyết định</label>
+          <textarea id="kt-ly-do" name="LyDo" rows="3" required placeholder="Ghi rõ lý do khen thưởng hoặc vi phạm kỷ luật..."></textarea>
+        </div>
+        <div class="dialog-actions">
+          <button class="nut" id="nut-luu-kt" type="submit">Lưu quyết định</button>
+          <button class="nut nut-vien" id="nut-huy-kt" type="button">Hủy</button>
+        </div>
+      </form>
+    </dialog>
+
+    <footer>
+      <p>© 2026 HRM &amp; Payroll — Hệ thống Quản lý Nhân sự &amp; Tiền lương.</p>
+      <address>Email hỗ trợ: <a href="mailto:hrm@example.com">hrm@example.com</a></address>
+    </footer>
+  </body>
+</html>

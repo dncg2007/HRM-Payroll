@@ -37,16 +37,20 @@
     const laToi = theme === "dark";
     nutTheme.setAttribute("aria-pressed", String(laToi));
     nutTheme.setAttribute("aria-label", laToi ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối");
-    nutTheme.textContent = laToi ? "Giao diện sáng" : "Giao diện tối";
+    nutTheme.innerHTML = `<i class="bi ${laToi ? "bi-sun" : "bi-moon-stars"}" aria-hidden="true"></i> ${laToi ? "Giao diện sáng" : "Giao diện tối"}`;
   }
 
   function apDungTheme(theme, ghiNho) {
     const themeHopLe = theme === "dark" ? "dark" : "light";
     docElement.dataset.theme = themeHopLe;
+    /* Đồng bộ dark mode của Bootstrap 5.3 (data-bs-theme) cho các component Bootstrap. */
+    docElement.dataset.bsTheme = themeHopLe;
     capNhatNut(themeHopLe);
     if (ghiNho) {
       try { localStorage.setItem(khoaTheme, themeHopLe); } catch (loi) { /* Storage bị chặn vẫn không cản giao diện. */ }
     }
+    /* Phát sự kiện để Chart.js và thư viện khác kịp đổi màu theo theme. */
+    window.dispatchEvent(new CustomEvent("hrm:themechange", { detail: { theme: themeHopLe } }));
   }
 
   apDungTheme(uuTienTheme(), false);
