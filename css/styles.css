@@ -2498,15 +2498,25 @@ dialog form {
   }
 
   /* 3. CHẾ ĐỘ IN HỒ SƠ NHÂN VIÊN */
+  body.che-do-in-ho-so {
+    display: block !important;
+  }
+
   body.che-do-in-ho-so dialog#dialog-xem-ho-so {
     display: block !important;
     position: static !important;
     width: 100% !important;
-    max-width: 180mm !important;
-    margin: 5mm auto !important;
-    border: 2px solid #000 !important;
-    padding: 15mm !important;
+    max-width: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
     box-shadow: none !important;
+  }
+
+  body.che-do-in-ho-so dialog#dialog-xem-ho-so::backdrop {
+    display: none;
   }
 
   body.che-do-in-ho-so main,
@@ -2515,10 +2525,22 @@ dialog form {
     display: none !important;
   }
 
+  body.che-do-in-ho-so .ho-so-luoi-khoi {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   body.che-do-in-ho-so .ho-so-dong {
-    display: grid !important;
-    grid-template-columns: 55mm 1fr !important;
-    row-gap: 6px !important;
+    grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+    break-inside: avoid;
+  }
+
+  body.che-do-in-ho-so .ho-so-chan {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    break-inside: avoid;
+  }
+
+  body.che-do-in-ho-so .ho-so-chan .ho-so-dong {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   body.che-do-in-ho-so .dialog-actions,

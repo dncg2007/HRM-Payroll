@@ -1,5 +1,9 @@
 # Ghi chú cập nhật
 
+## Sửa bản in hồ sơ nhân viên
+
+- Dành đủ chiều rộng cho cột nội dung và bỏ khung cuộn khi in để hiển thị đầy đủ các nhóm thông tin.
+
 ## Hoàn thiện website Quản lý Nhân sự và Tiền lương
 
 Các thay đổi dưới đây được đối chiếu với nhánh `main` tại commit `ab77cc4`.
